@@ -45,3 +45,40 @@ Reordering strategies:
 
 Run all tests:
 bash test/allTests.sh
+
+## 5. Matrix
+Matrices used in this project are available from the [SuiteSparse Matrix Collection](https://sparse.tamu.edu/):
+
+| Matrix      | Rows      | NNZ        | Category             | SuiteSparse Group |
+|-------------|-----------|------------|----------------------|-------------------|
+| cant        | 62,451    | 4,007,383  | Scientific Computing | Williams          |
+| ct20stif    | 52,329    | 2,600,295  | Scientific Computing | Boeing            |
+| nlpkkt80    | 1,062,400 | 28,192,672 | Random Sparse        | Schenk            |
+| barrier2-1  | 113,076   | 2,129,496  | Random Sparse        | Schenk_ISEI       |
+| roadNet-CA  | 1,971,281 | 5,533,214  | Graph                | SNAP              |
+| roadNet-TX  | 1,393,383 | 3,843,320  | Graph                | SNAP              |
+| com-Youtube | 1,134,890 | 5,975,248  | Large-Scale Graph    | SNAP              |
+
+Downloading Matrices
+Matrix files are not included in this repository due to size. Download them from the
+[SuiteSparse Matrix Collection](https://sparse.tamu.edu/) using the script below.
+
+Automatic download (recommended):
+bash scripts/downloadMatrices.sh
+
+Required directory structure after download:
+data/
+├── sciComputingMatrix/
+│   ├── cant/cant.mtx
+│   └── ct20stif/ct20stif.mtx
+├── randomSparseMatrix/
+│   ├── barrier2-1/barrier2-1.mtx
+│   └── nlpkkt80/nlpkkt80.mtx    
+├── graphMatrix/
+│   ├── roadNet-CA/roadNet-CA.mtx
+│   └── roadNet-TX/roadNet-TX.mtx
+└── largeScaleGraphMatrix/
+    └── com-Youtube/com-Youtube.mtx
+
+
+
