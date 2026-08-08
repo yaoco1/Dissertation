@@ -50,7 +50,13 @@ Reordering strategies:
 ./build/globalHilbert  <matrix.mtx> [blockSize]   # default blockSize=512
 
 Run all tests:
-bash test/allTests.sh
+# Run custom kernel benchmarks
+bash script/runCustomKernels.sh
+# Run Hilbert reordering benchmarks  
+bash script/runHilbertReordering.sh
+
+All results are saved to the `results/` directory.
+
 
 ## 5. Matrix
 Matrices used in this project are available from the [SuiteSparse Matrix Collection](https://sparse.tamu.edu/):

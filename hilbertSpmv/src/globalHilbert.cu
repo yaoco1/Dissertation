@@ -6,7 +6,7 @@
  * the row access pattern and the x-vector access pattern reflect the same spatial ordering.
  *
  * @author Congcong Yao
- * @version 1.0
+ * @version 2.0
  * @date   07/08/2026
  *
  */
@@ -111,7 +111,7 @@ ReorderResult globalHilbertReorder(int rows, int cols, int nnz, const int* rowPt
     }
 
     float* xPerm = (float*)malloc(cols * sizeof(float));
-    for (int i = 0; i < cols; i++)
+    for (int i = 0; i < rows; i++)
         xPerm[i] = x[perm[i]];
 
     ReorderResult r;
@@ -130,19 +130,19 @@ ReorderResult globalHilbertReorder(int rows, int cols, int nnz, const int* rowPt
 int main(int argc, char** argv)
 {
     if (argc < 2) {
-        printf("Usage: ./global_hilbert <matrix.mtx> [blockSize]\n");
-        printf("  blockSize: Hilbert tile size (default: 512)\n");
+        printf("Usage: ./global_hilbert <matrix.mtx> [hilbertBlock]\n");
+        printf("  hilbertBlock: Hilbert tile size (default: 512)\n");
         return 1;
     }
 
-    int blockSize = (argc >= 3) ? atoi(argv[2]) : 512;
+    int hilbertBlock = (argc >= 3) ? atoi(argv[2]) : 512;
 
     // Read matrix from file
     int rows, cols, nnz;
     int *rowPtr, *colIdx; float *val;
     loadMtx(argv[1], &rows, &cols, &nnz, &rowPtr, &colIdx, &val);
     printf("Matrix: %d x %d, nnz = %d\n", rows, cols, nnz);
-    printf("Block size: %d\n\n", blockSize);
+    printf("Hilbert block size: %d\n\n", hilbertBlock);
 
     // Build input and output vectors
     float* x = (float*) malloc(cols * sizeof(float));
@@ -157,10 +157,10 @@ int main(int argc, char** argv)
 
     // Global Hilbert Reordering
     auto t0 = std::chrono::high_resolution_clock::now();
-    ReorderResult rr = globalHilbertReorder(rows, cols, nnz, rowPtr, colIdx, val, x, blockSize);
+    ReorderResult rr = globalHilbertReorder(rows, cols, nnz, rowPtr, colIdx, val, x, hilbertBlock);
     auto t1 = std::chrono::high_resolution_clock::now();
     double preprocessMs = std::chrono::duration<double, std::milli>(t1 - t0).count();
-    printf("Preprocessing (global Hilbert, B=%d): %.2f ms\n\n", blockSize, preprocessMs);
+    printf("Preprocessing (global Hilbert, B=%d): %.2f ms\n\n", hilbertBlock, preprocessMs);
 
     // Allocate GPU memory
     int *rpGpu, *ciGpu, *rp2Gpu, *ci2Gpu;
@@ -168,7 +168,7 @@ int main(int argc, char** argv)
     cudaMalloc(&rpGpu, (rows+1)*sizeof(int));
     cudaMalloc(&ciGpu, nnz*sizeof(int));
     cudaMalloc(&valGpu, nnz*sizeof(float));
-    cudaMalloc(&rp2Gpu, (cols+1)*sizeof(int));
+    cudaMalloc(&rp2Gpu, (rows+1)*sizeof(int));
     cudaMalloc(&ci2Gpu, nnz*sizeof(int));
     cudaMalloc(&val2Gpu, nnz*sizeof(float));
     cudaMalloc(&xGpu, cols*sizeof(float));
@@ -179,12 +179,13 @@ int main(int argc, char** argv)
     cudaMemcpy(ciGpu, colIdx, nnz*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(valGpu, val, nnz*sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(xGpu, x, cols*sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(rp2Gpu, rr.rowPtr, (cols+1)*sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(rp2Gpu, rr.rowPtr, (rows+1)*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(ci2Gpu, rr.colIdx, nnz*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(val2Gpu, rr.val, nnz*sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(x2Gpu, rr.xPerm, cols*sizeof(float), cudaMemcpyHostToDevice);
 
     const int RUNS = 100;
+    const int blockSize = 256;
     float bytes = (float)(nnz*4 + nnz*4 + (rows+1)*4 + cols*4 + rows*4);
     float* yRecovered = (float*)malloc(rows * sizeof(float));
     int shMem = SHARED_VEC_SIZE * sizeof(float);
@@ -220,7 +221,7 @@ int main(int argc, char** argv)
     t[0] = timeKernel(NAIVE, rpGpu, ciGpu,  valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[0], bw(t[0]));
 
-    printf("\n[2] Naive CSR      |  global-hilbert-reordered  (B=%d)\n", blockSize);
+    printf("\n[2] Naive CSR      |  global-hilbert-reordered  (B=%d)\n", hilbertBlock);
     naiveCsrSpmv<<<gridNaive, blockSize>>>(rp2Gpu, ci2Gpu, val2Gpu, x2Gpu, yGpu, rows);
     cudaDeviceSynchronize();
     checkReordered();
@@ -234,7 +235,7 @@ int main(int argc, char** argv)
     t[2] = timeKernel(WARP, rpGpu, ciGpu, valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[2], bw(t[2]));
 
-    printf("\n[4] Warp CSR       |  global-hilbert-reordered  (B=%d)\n", blockSize);
+    printf("\n[4] Warp CSR       |  global-hilbert-reordered  (B=%d)\n", hilbertBlock);
     warpCsrSpmv<<<gridWarp, blockSize>>>(rp2Gpu, ci2Gpu, val2Gpu, x2Gpu, yGpu, rows);
     cudaDeviceSynchronize();
     checkReordered();
@@ -248,7 +249,7 @@ int main(int argc, char** argv)
     t[4] = timeKernel(SHARED, rpGpu, ciGpu, valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[4], bw(t[4]));
 
-    printf("\n[6] Shared CSR     |  global-hilbert-reordered  (B=%d, window=%d)\n", blockSize, SHARED_VEC_SIZE);
+    printf("\n[6] Shared CSR     |  global-hilbert-reordered  (B=%d, window=%d)\n", hilbertBlock, SHARED_VEC_SIZE);
     sharedCsrSpmv<<<gridWarp, blockSize, shMem>>>(rp2Gpu, ci2Gpu, val2Gpu, x2Gpu, yGpu, rows, cols, SHARED_VEC_SIZE);
     cudaDeviceSynchronize();
     checkReordered();
@@ -256,7 +257,7 @@ int main(int argc, char** argv)
     printf("  Time: %.4f ms  |  BW: %.2f GB/s  |  Speedup vs [5]: %.3fx\n", t[5], bw(t[5]), t[4]/t[5]);
 
     printf("\n════════════════════════════════════════════════════════\n");
-    printf("Preprocessing (global Hilbert, B=%d): %.2f ms\n\n", blockSize, preprocessMs);
+    printf("Preprocessing (global Hilbert, B=%d): %.2f ms\n\n", hilbertBlock, preprocessMs);
     printf("%-20s  %10s  %12s  %10s\n", "Kernel", "Original", "GH-Reordered", "Reo/Orig");
     printf("────────────────────────────────────────────────────────\n");
     printf("%-20s  %8.4f ms  %10.4f ms  %8.3fx\n", "Naive",  t[0], t[1], t[0]/t[1]);

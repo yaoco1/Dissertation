@@ -7,7 +7,7 @@
  * symmetric permutation.
  * 
  * @author Congcong Yao
- * @version 1.0
+ * @version 2.0
  * @date   07/08/2026
  *
  */
@@ -106,6 +106,7 @@ ReorderResult blockedHilbertReorder(int rows, int cols, int nnz, const int* rowP
     r.rowPtr = newRp;
     r.colIdx = newCi;
     r.val = newVal;
+    r.xPerm = nullptr;
     r.perm = (int*)malloc(rows * sizeof(int));
     r.invPerm = (int*)malloc(rows * sizeof(int));
     memcpy(r.perm, perm.data(), rows * sizeof(int));
@@ -117,12 +118,12 @@ ReorderResult blockedHilbertReorder(int rows, int cols, int nnz, const int* rowP
 int main(int argc, char** argv)
 {
     if (argc < 2) {
-        printf("Usage: ./blocked_hilbert <matrix.mtx> [block_size]\n");
-        printf("  block_size: Hilbert tile size (default: 512)\n");
+        printf("Usage: ./blocked_hilbert <matrix.mtx> [hilbertBlock]\n");
+        printf("  hilbertBlock: Hilbert tile size (default: 512)\n");
         return 1;
     }
 
-    int blockSize = (argc >= 3) ? atoi(argv[2]) : 512;
+    int hilbertBlock = (argc >= 3) ? atoi(argv[2]) : 512;
 
     // Read matrix from file
     int rows, cols, nnz;
@@ -130,9 +131,9 @@ int main(int argc, char** argv)
     float *val;
     loadMtx(argv[1], &rows, &cols, &nnz, &rowPtr, &colIdx, &val);
     printf("Matrix: %d x %d, nnz = %d\n", rows, cols, nnz);
-    printf("Block size: %d  (Hilbert grid: %llu x %llu)\n", blockSize,
-           (unsigned long long)nextPow264(((uint64_t)rows + blockSize - 1) / blockSize),
-           (unsigned long long)nextPow264(((uint64_t)cols + blockSize - 1) / blockSize));
+    printf("Hilbert block size: %d  (Hilbert grid: %llu x %llu)\n", hilbertBlock,
+           (unsigned long long)nextPow264(((uint64_t)rows + hilbertBlock - 1) / hilbertBlock),
+           (unsigned long long)nextPow264(((uint64_t)cols + hilbertBlock - 1) / hilbertBlock));
     printf("\n");
 
     // Build input and output vectors
@@ -148,10 +149,10 @@ int main(int argc, char** argv)
 
     // Blocked Hilbert Reordering（CPU preprocessing）
     auto t0 = std::chrono::high_resolution_clock::now();
-    ReorderResult rr = blockedHilbertReorder(rows, cols, nnz, rowPtr, colIdx, val, blockSize);
+    ReorderResult rr = blockedHilbertReorder(rows, cols, nnz, rowPtr, colIdx, val, hilbertBlock);
     auto t1 = std::chrono::high_resolution_clock::now();
     double preprocessMs = std::chrono::duration<double, std::milli>(t1 - t0).count();
-    printf("Preprocessing (blocked Hilbert, B=%d): %.2f ms\n\n", blockSize, preprocessMs);
+    printf("Preprocessing (blocked Hilbert, B=%d): %.2f ms\n\n", hilbertBlock, preprocessMs);
 
     // Allocate GPU memory
     int *rpGpu, *ciGpu, *rp2Gpu, *ci2Gpu;
@@ -174,6 +175,7 @@ int main(int argc, char** argv)
     cudaMemcpy(xGpu, x, cols*sizeof(float), cudaMemcpyHostToDevice);
 
     const int RUNS = 10;
+    const int blockSize = 256;
     float bytes = (float)(nnz*4 + nnz*4 + (rows+1)*4 + cols*4 + rows*4);
     float* yRecovered = (float*)malloc(rows * sizeof(float));
     int shMem = SHARED_VEC_SIZE * sizeof(float);
@@ -208,7 +210,7 @@ int main(int argc, char** argv)
     t[0] = timeKernel(NAIVE, rpGpu, ciGpu, valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[0], bw(t[0]));
 
-    printf("\n[2] Naive CSR      |  blocked-hilbert-reordered  (B=%d)\n", blockSize);
+    printf("\n[2] Naive CSR      |  blocked-hilbert-reordered  (B=%d)\n", hilbertBlock);
     naiveCsrSpmv<<<gridNaive, blockSize>>>(rp2Gpu, ci2Gpu, val2Gpu, xGpu, yGpu, rows);
     cudaDeviceSynchronize();
     checkReordered();
@@ -222,7 +224,7 @@ int main(int argc, char** argv)
     t[2] = timeKernel(WARP, rpGpu, ciGpu, valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[2], bw(t[2]));
 
-    printf("\n[4] Warp CSR       |  blocked-hilbert-reordered  (B=%d)\n", blockSize);
+    printf("\n[4] Warp CSR       |  blocked-hilbert-reordered  (B=%d)\n", hilbertBlock);
     warpCsrSpmv<<<gridWarp, blockSize>>>(rp2Gpu, ci2Gpu, val2Gpu, xGpu, yGpu, rows);
     cudaDeviceSynchronize();
     checkReordered();
@@ -236,7 +238,7 @@ int main(int argc, char** argv)
     t[4] = timeKernel(SHARED, rpGpu, ciGpu, valGpu, xGpu, yGpu, rows, cols, RUNS);
     printf("  Time: %.4f ms  |  BW: %.2f GB/s\n", t[4], bw(t[4]));
 
-    printf("\n[6] Shared CSR     |  blocked-hilbert-reordered  (B=%d, window=%d)\n", blockSize, SHARED_VEC_SIZE);
+    printf("\n[6] Shared CSR     |  blocked-hilbert-reordered  (B=%d, window=%d)\n", hilbertBlock, SHARED_VEC_SIZE);
     sharedCsrSpmv<<<gridWarp, blockSize, shMem>>>(rp2Gpu, ci2Gpu, val2Gpu, xGpu, yGpu, rows, cols, SHARED_VEC_SIZE);
     cudaDeviceSynchronize();
     checkReordered();
@@ -244,7 +246,7 @@ int main(int argc, char** argv)
     printf("  Time: %.4f ms  |  BW: %.2f GB/s  |  Speedup vs [5]: %.3fx\n", t[5], bw(t[5]), t[4]/t[5]);
 
     printf("\n════════════════════════════════════════════════════════\n");
-    printf("Preprocessing (blocked Hilbert, B=%d): %.2f ms\n\n", blockSize, preprocessMs);
+    printf("Preprocessing (blocked Hilbert, B=%d): %.2f ms\n\n", hilbertBlock, preprocessMs);
 
     printf("%-20s  %10s  %12s  %10s\n", "Kernel", "Original", "BH-Reordered", "Reo/Orig");
     printf("────────────────────────────────────────────────────────\n");
