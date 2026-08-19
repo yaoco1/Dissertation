@@ -55,7 +55,7 @@ bash script/runCustomKernels.sh
 # Run Hilbert reordering benchmarks  
 bash script/runHilbertReordering.sh
 
-All results are saved to the `results/` directory.
+All the experimental results are saved to the `results/` directory, including those for RTX3090 and V100.
 
 
 ## 5. Matrix

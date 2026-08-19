@@ -1,0 +1,1555 @@
+Start time: Sat Aug  8 14:19:51 IST 2026
+
+==========================================
+ Phase 2: ncu Memory Workload Analysis
+==========================================
+------------------------------------------
+ ncu: baseline (cuSPARSE)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1292514 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+cuSPARSE baseline:
+  Average time: 0.0985 ms
+  Bandwidth:    333.08 GB/s
+  GFLOPS:       81.37
+==PROF== Disconnected from process 1292514
+[1292514] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (61, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Mbyte/s       659.57
+    Mem Busy                    %         3.69
+    Max Bandwidth               %         3.87
+    L1/TEX Hit Rate             %         0.01
+    L2 Hit Rate                 %        99.25
+    Mem Pipes Busy              %         1.02
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1292573 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+cuSPARSE baseline:
+  Average time: 0.1267 ms
+  Bandwidth:    169.12 GB/s
+  GFLOPS:       41.04
+==PROF== Disconnected from process 1292573
+[1292573] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (52, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Mbyte/s       642.11
+    Mem Busy                    %         3.08
+    Max Bandwidth               %         3.21
+    L1/TEX Hit Rate             %         0.02
+    L2 Hit Rate                 %        99.12
+    Mem Pipes Busy              %         0.87
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1292634 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+cuSPARSE baseline:
+  Average time: 0.1304 ms
+  Bandwidth:    141.10 GB/s
+  GFLOPS:       32.67
+==PROF== Disconnected from process 1292634
+[1292634] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (111, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Mbyte/s       584.27
+    Mem Busy                    %         6.91
+    Max Bandwidth               %         7.17
+    L1/TEX Hit Rate             %            0
+    L2 Hit Rate                 %        99.64
+    Mem Pipes Busy              %         1.95
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1292694 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+cuSPARSE baseline:
+  Average time: 0.3390 ms
+  Bandwidth:    702.82 GB/s
+  GFLOPS:       166.31
+==PROF== Disconnected from process 1292694
+[1292694] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (1038, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       420.13
+    Mem Busy                    %        30.02
+    Max Bandwidth               %        52.45
+    L1/TEX Hit Rate             %            0
+    L2 Hit Rate                 %        99.96
+    Mem Pipes Busy              %         7.17
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1292756 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+cuSPARSE baseline:
+  Average time: 0.1310 ms
+  Bandwidth:    518.52 GB/s
+  GFLOPS:       84.48
+==PROF== Disconnected from process 1292756
+[1292756] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (1926, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       602.40
+    Mem Busy                    %        32.51
+    Max Bandwidth               %        78.85
+    L1/TEX Hit Rate             %         0.00
+    L2 Hit Rate                 %        99.97
+    Mem Pipes Busy              %         7.70
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1292816 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+cuSPARSE baseline:
+  Average time: 0.1313 ms
+  Bandwidth:    361.41 GB/s
+  GFLOPS:       58.53
+==PROF== Disconnected from process 1292816
+[1292816] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (1361, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       502.24
+    Mem Busy                    %        31.79
+    Max Bandwidth               %        66.86
+    L1/TEX Hit Rate             %         0.00
+    L2 Hit Rate                 %        99.97
+    Mem Pipes Busy              %         7.96
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1292875 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/baseline)
+==PROF== Profiling "vector_scalar_multiply_kernel" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+cuSPARSE baseline:
+  Average time: 0.1316 ms
+  Bandwidth:    466.78 GB/s
+  GFLOPS:       90.82
+==PROF== Disconnected from process 1292875
+[1292875] baseline@127.0.0.1
+  void vector_scalar_multiply_kernel<256, AlignedVectorScalarMultiplyPolicy, int, float, float>(KernelCoeff<T5>, T3, T4 *) (1109, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       451.73
+    Mem Busy                    %        31.26
+    Max Bandwidth               %        55.88
+    L1/TEX Hit Rate             %         0.00
+    L2 Hit Rate                 %        99.96
+    Mem Pipes Busy              %         7.56
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: naiveCsr
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1292947 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 2.02e-06
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.5421 ms
+  Bandwidth: 12.91 GB/s
+  GFLOPS:    3.15
+==PROF== Disconnected from process 1292947
+[1292947] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (244, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       716.10
+    Mem Busy                    %        23.39
+    Max Bandwidth               %        84.20
+    L1/TEX Hit Rate             %        68.02
+    L2 Hit Rate                 %        25.68
+    Mem Pipes Busy              %         2.34
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1293006 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 3.52e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.4009 ms
+  Bandwidth: 8.93 GB/s
+  GFLOPS:    2.17
+==PROF== Disconnected from process 1293006
+[1293006] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (205, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       703.90
+    Mem Busy                    %        32.91
+    Max Bandwidth               %        80.75
+    L1/TEX Hit Rate             %        75.37
+    L2 Hit Rate                 %        32.96
+    Mem Pipes Busy              %         4.05
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1293066 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 6.47e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.9669 ms
+  Bandwidth: 6.20 GB/s
+  GFLOPS:    1.44
+==PROF== Disconnected from process 1293066
+[1293066] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (442, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       106.00
+    Mem Busy                    %         5.24
+    Max Bandwidth               %        11.89
+    L1/TEX Hit Rate             %        70.72
+    L2 Hit Rate                 %        44.34
+    Mem Pipes Busy              %         0.81
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1293125 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.20e-07
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      3.8280 ms
+  Bandwidth: 62.25 GB/s
+  GFLOPS:    14.73
+==PROF== Disconnected from process 1293125
+[1293125] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (4150, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       857.47
+    Mem Busy                    %        37.79
+    Max Bandwidth               %        95.38
+    L1/TEX Hit Rate             %        65.38
+    L2 Hit Rate                 %        18.48
+    Mem Pipes Busy              %         2.30
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1293186 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.4206 ms
+  Bandwidth: 28.06 GB/s
+  GFLOPS:    4.57
+==PROF== Disconnected from process 1293186
+[1293186] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (7701, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       669.28
+    Mem Busy                    %        44.29
+    Max Bandwidth               %        77.24
+    L1/TEX Hit Rate             %        68.39
+    L2 Hit Rate                 %        52.54
+    Mem Pipes Busy              %        15.89
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1293246 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.3814 ms
+  Bandwidth: 19.93 GB/s
+  GFLOPS:    3.23
+==PROF== Disconnected from process 1293246
+[1293246] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (5443, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       650.81
+    Mem Busy                    %        42.82
+    Max Bandwidth               %        74.61
+    L1/TEX Hit Rate             %        68.49
+    L2 Hit Rate                 %        52.09
+    Mem Pipes Busy              %        15.52
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1293305 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/naiveCsr)
+==PROF== Profiling "naiveCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      4.8377 ms
+  Bandwidth: 12.70 GB/s
+  GFLOPS:    2.47
+==PROF== Disconnected from process 1293305
+[1293305] naiveCsr@127.0.0.1
+  naiveCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (4434, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        53.97
+    Mem Busy                    %         4.69
+    Max Bandwidth               %         6.01
+    L1/TEX Hit Rate             %        61.38
+    L2 Hit Rate                 %        67.29
+    Mem Pipes Busy              %         2.53
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: warpCsr
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1293366 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.3896 ms
+  Bandwidth: 13.73 GB/s
+  GFLOPS:    3.35
+==PROF== Disconnected from process 1293366
+[1293366] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       623.15
+    Mem Busy                    %        30.55
+    Max Bandwidth               %        74.00
+    L1/TEX Hit Rate             %        53.47
+    L2 Hit Rate                 %        31.02
+    Mem Pipes Busy              %        21.51
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1293425 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.4046 ms
+  Bandwidth: 8.91 GB/s
+  GFLOPS:    2.16
+==PROF== Disconnected from process 1293425
+[1293425] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       584.08
+    Mem Busy                    %        29.20
+    Max Bandwidth               %        66.54
+    L1/TEX Hit Rate             %        52.25
+    L2 Hit Rate                 %        31.88
+    Mem Pipes Busy              %        22.82
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1293485 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.4064 ms
+  Bandwidth: 7.64 GB/s
+  GFLOPS:    1.77
+==PROF== Disconnected from process 1293485
+[1293485] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       364.37
+    Mem Busy                    %        43.52
+    Max Bandwidth               %        42.95
+    L1/TEX Hit Rate             %        59.55
+    L2 Hit Rate                 %        62.33
+    Mem Pipes Busy              %        29.80
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1293544 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.9345 ms
+  Bandwidth: 81.20 GB/s
+  GFLOPS:    19.21
+==PROF== Disconnected from process 1293544
+[1293544] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       529.88
+    Mem Busy                    %        46.04
+    Max Bandwidth               %        59.40
+    L1/TEX Hit Rate             %        60.24
+    L2 Hit Rate                 %        43.12
+    Mem Pipes Busy              %        30.58
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1293605 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      3.0310 ms
+  Bandwidth: 22.41 GB/s
+  GFLOPS:    3.65
+==PROF== Disconnected from process 1293605
+[1293605] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       104.75
+    Mem Busy                    %        40.98
+    Max Bandwidth               %        38.42
+    L1/TEX Hit Rate             %        69.37
+    L2 Hit Rate                 %        84.53
+    Mem Pipes Busy              %        38.42
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1293666 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.9210 ms
+  Bandwidth: 16.25 GB/s
+  GFLOPS:    2.63
+==PROF== Disconnected from process 1293666
+[1293666] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       102.88
+    Mem Busy                    %        40.48
+    Max Bandwidth               %        37.94
+    L1/TEX Hit Rate             %        68.96
+    L2 Hit Rate                 %        84.82
+    Mem Pipes Busy              %        37.94
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1293726 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/warpCsr)
+==PROF== Profiling "warpCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      2.7493 ms
+  Bandwidth: 22.34 GB/s
+  GFLOPS:    4.35
+==PROF== Disconnected from process 1293726
+[1293726] warpCsr@127.0.0.1
+  warpCsrSpmv(const int *, const int *, const float *, const float *, float *, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       174.62
+    Mem Busy                    %        41.79
+    Max Bandwidth               %        35.70
+    L1/TEX Hit Rate             %        53.19
+    L2 Hit Rate                 %        79.89
+    Mem Pipes Busy              %        35.70
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=256)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1293786 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      2.4172 ms
+  Bandwidth: 13.57 GB/s
+  GFLOPS:    3.32
+==PROF== Disconnected from process 1293786
+[1293786] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       552.97
+    Mem Busy                    %        30.13
+    Max Bandwidth               %        63.65
+    L1/TEX Hit Rate             %        46.28
+    L2 Hit Rate                 %        37.11
+    Mem Pipes Busy              %        25.59
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1293846 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      2.4154 ms
+  Bandwidth: 8.87 GB/s
+  GFLOPS:    2.15
+==PROF== Disconnected from process 1293846
+[1293846] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       482.11
+    Mem Busy                    %        28.52
+    Max Bandwidth               %        55.34
+    L1/TEX Hit Rate             %        39.65
+    L2 Hit Rate                 %        40.13
+    Mem Pipes Busy              %        25.51
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1293907 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      2.4000 ms
+  Bandwidth: 7.66 GB/s
+  GFLOPS:    1.77
+==PROF== Disconnected from process 1293907
+[1293907] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       257.78
+    Mem Busy                    %        34.46
+    Max Bandwidth               %        29.55
+    L1/TEX Hit Rate             %        50.81
+    L2 Hit Rate                 %        68.64
+    Mem Pipes Busy              %        27.46
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1293966 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      3.0833 ms
+  Bandwidth: 77.28 GB/s
+  GFLOPS:    18.29
+==PROF== Disconnected from process 1293966
+[1293966] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       400.59
+    Mem Busy                    %        41.51
+    Max Bandwidth               %        44.63
+    L1/TEX Hit Rate             %        54.25
+    L2 Hit Rate                 %        55.98
+    Mem Pipes Busy              %        31.53
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1294026 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      3.4241 ms
+  Bandwidth: 19.84 GB/s
+  GFLOPS:    3.23
+==PROF== Disconnected from process 1294026
+[1294026] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        73.24
+    Mem Busy                    %        36.96
+    Max Bandwidth               %        34.87
+    L1/TEX Hit Rate             %        52.73
+    L2 Hit Rate                 %        91.01
+    Mem Pipes Busy              %        36.92
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1294087 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      3.1318 ms
+  Bandwidth: 15.16 GB/s
+  GFLOPS:    2.45
+==PROF== Disconnected from process 1294087
+[1294087] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        71.89
+    Mem Busy                    %        36.53
+    Max Bandwidth               %        34.45
+    L1/TEX Hit Rate             %        52.91
+    L2 Hit Rate                 %        90.89
+    Mem Pipes Busy              %        36.48
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1294146 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      3.0620 ms
+  Bandwidth: 20.06 GB/s
+  GFLOPS:    3.90
+==PROF== Disconnected from process 1294146
+[1294146] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       126.52
+    Mem Busy                    %        38.70
+    Max Bandwidth               %        33.66
+    L1/TEX Hit Rate             %        44.53
+    L2 Hit Rate                 %        86.77
+    Mem Pipes Busy              %        35.61
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=512)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1294206 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      2.3933 ms
+  Bandwidth: 13.71 GB/s
+  GFLOPS:    3.35
+==PROF== Disconnected from process 1294206
+[1294206] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       496.81
+    Mem Busy                    %        28.85
+    Max Bandwidth               %        57.17
+    L1/TEX Hit Rate             %        36.24
+    L2 Hit Rate                 %        40.90
+    Mem Pipes Busy              %        25.78
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1294265 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      2.2805 ms
+  Bandwidth: 9.40 GB/s
+  GFLOPS:    2.28
+==PROF== Disconnected from process 1294265
+[1294265] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       430.90
+    Mem Busy                    %        28.84
+    Max Bandwidth               %        50.21
+    L1/TEX Hit Rate             %        39.29
+    L2 Hit Rate                 %        46.68
+    Mem Pipes Busy              %        26.00
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1294326 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      2.4093 ms
+  Bandwidth: 7.63 GB/s
+  GFLOPS:    1.77
+==PROF== Disconnected from process 1294326
+[1294326] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       240.67
+    Mem Busy                    %        36.66
+    Max Bandwidth               %        28.69
+    L1/TEX Hit Rate             %        49.28
+    L2 Hit Rate                 %        73.66
+    Mem Pipes Busy              %        30.10
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1294386 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      3.2138 ms
+  Bandwidth: 74.14 GB/s
+  GFLOPS:    17.54
+==PROF== Disconnected from process 1294386
+[1294386] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       338.16
+    Mem Busy                    %        39.45
+    Max Bandwidth               %        37.70
+    L1/TEX Hit Rate             %        53.05
+    L2 Hit Rate                 %        62.38
+    Mem Pipes Busy              %        30.88
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1294446 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      3.7224 ms
+  Bandwidth: 18.25 GB/s
+  GFLOPS:    2.97
+==PROF== Disconnected from process 1294446
+[1294446] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        61.46
+    Mem Busy                    %        36.29
+    Max Bandwidth               %        34.33
+    L1/TEX Hit Rate             %        50.20
+    L2 Hit Rate                 %        93.50
+    Mem Pipes Busy              %        36.05
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1294507 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      3.2860 ms
+  Bandwidth: 14.45 GB/s
+  GFLOPS:    2.34
+==PROF== Disconnected from process 1294507
+[1294507] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        60.37
+    Mem Busy                    %        35.75
+    Max Bandwidth               %        33.83
+    L1/TEX Hit Rate             %        50.89
+    L2 Hit Rate                 %        93.51
+    Mem Pipes Busy              %        35.52
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1294566 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      3.1403 ms
+  Bandwidth: 19.56 GB/s
+  GFLOPS:    3.81
+==PROF== Disconnected from process 1294566
+[1294566] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       107.95
+    Mem Busy                    %        38.25
+    Max Bandwidth               %        33.73
+    L1/TEX Hit Rate             %        42.93
+    L2 Hit Rate                 %        89.60
+    Mem Pipes Busy              %        35.39
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=1024)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1294626 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      2.4484 ms
+  Bandwidth: 13.40 GB/s
+  GFLOPS:    3.27
+==PROF== Disconnected from process 1294626
+[1294626] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       428.32
+    Mem Busy                    %        29.85
+    Max Bandwidth               %        48.80
+    L1/TEX Hit Rate             %        37.16
+    L2 Hit Rate                 %        46.77
+    Mem Pipes Busy              %        26.93
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1294685 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      2.2889 ms
+  Bandwidth: 9.36 GB/s
+  GFLOPS:    2.27
+==PROF== Disconnected from process 1294685
+[1294685] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       370.16
+    Mem Busy                    %        30.28
+    Max Bandwidth               %        42.97
+    L1/TEX Hit Rate             %        43.98
+    L2 Hit Rate                 %        53.10
+    Mem Pipes Busy              %        27.67
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1294746 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      2.4273 ms
+  Bandwidth: 7.58 GB/s
+  GFLOPS:    1.75
+==PROF== Disconnected from process 1294746
+[1294746] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       210.22
+    Mem Busy                    %        38.66
+    Max Bandwidth               %        31.75
+    L1/TEX Hit Rate             %        51.95
+    L2 Hit Rate                 %        78.12
+    Mem Pipes Busy              %        32.96
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1294806 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      3.4130 ms
+  Bandwidth: 69.82 GB/s
+  GFLOPS:    16.52
+==PROF== Disconnected from process 1294806
+[1294806] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       270.16
+    Mem Busy                    %        38.93
+    Max Bandwidth               %        30.68
+    L1/TEX Hit Rate             %        53.44
+    L2 Hit Rate                 %        69.69
+    Mem Pipes Busy              %        31.86
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1294866 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      4.0428 ms
+  Bandwidth: 16.80 GB/s
+  GFLOPS:    2.74
+==PROF== Disconnected from process 1294866
+[1294866] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        48.23
+    Mem Busy                    %        36.74
+    Max Bandwidth               %        34.93
+    L1/TEX Hit Rate             %        52.39
+    L2 Hit Rate                 %        95.37
+    Mem Pipes Busy              %        36.28
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1294927 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      3.5589 ms
+  Bandwidth: 13.34 GB/s
+  GFLOPS:    2.16
+==PROF== Disconnected from process 1294927
+[1294927] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        47.42
+    Mem Busy                    %        36.27
+    Max Bandwidth               %        34.51
+    L1/TEX Hit Rate             %        52.82
+    L2 Hit Rate                 %        95.43
+    Mem Pipes Busy              %        35.84
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1294988 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      3.3252 ms
+  Bandwidth: 18.47 GB/s
+  GFLOPS:    3.59
+==PROF== Disconnected from process 1294988
+[1294988] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        85.39
+    Mem Busy                    %        38.34
+    Max Bandwidth               %        34.51
+    L1/TEX Hit Rate             %        47.60
+    L2 Hit Rate                 %        91.98
+    Mem Pipes Busy              %        35.82
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=2048)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1295048 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      2.4284 ms
+  Bandwidth: 13.51 GB/s
+  GFLOPS:    3.30
+==PROF== Disconnected from process 1295048
+[1295048] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       339.57
+    Mem Busy                    %        31.05
+    Max Bandwidth               %        38.71
+    L1/TEX Hit Rate             %        52.94
+    L2 Hit Rate                 %        49.89
+    Mem Pipes Busy              %        28.58
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1295107 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      2.3004 ms
+  Bandwidth: 9.32 GB/s
+  GFLOPS:    2.26
+==PROF== Disconnected from process 1295107
+[1295107] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       300.80
+    Mem Busy                    %        32.88
+    Max Bandwidth               %        33.82
+    L1/TEX Hit Rate             %        57.88
+    L2 Hit Rate                 %        55.78
+    Mem Pipes Busy              %        30.53
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1295168 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      2.4941 ms
+  Bandwidth: 7.37 GB/s
+  GFLOPS:    1.71
+==PROF== Disconnected from process 1295168
+[1295168] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       163.68
+    Mem Busy                    %        41.14
+    Max Bandwidth               %        35.84
+    L1/TEX Hit Rate             %        65.00
+    L2 Hit Rate                 %        79.49
+    Mem Pipes Busy              %        36.78
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1295227 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      3.6952 ms
+  Bandwidth: 64.49 GB/s
+  GFLOPS:    15.26
+==PROF== Disconnected from process 1295227
+[1295227] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       210.39
+    Mem Busy                    %        41.54
+    Max Bandwidth               %        34.87
+    L1/TEX Hit Rate             %        65.64
+    L2 Hit Rate                 %        71.15
+    Mem Pipes Busy              %        35.78
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1295287 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      4.4585 ms
+  Bandwidth: 15.23 GB/s
+  GFLOPS:    2.48
+==PROF== Disconnected from process 1295287
+[1295287] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        37.35
+    Mem Busy                    %        41.41
+    Max Bandwidth               %        39.58
+    L1/TEX Hit Rate             %        71.05
+    L2 Hit Rate                 %        95.72
+    Mem Pipes Busy              %        40.62
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1295348 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      3.8676 ms
+  Bandwidth: 12.27 GB/s
+  GFLOPS:    1.99
+==PROF== Disconnected from process 1295348
+[1295348] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        36.95
+    Mem Busy                    %        41.08
+    Max Bandwidth               %        39.27
+    L1/TEX Hit Rate             %        71.27
+    L2 Hit Rate                 %        95.68
+    Mem Pipes Busy              %        40.31
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1295407 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      3.6675 ms
+  Bandwidth: 16.75 GB/s
+  GFLOPS:    3.26
+==PROF== Disconnected from process 1295407
+[1295407] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        64.91
+    Mem Busy                    %        41.41
+    Max Bandwidth               %        38.17
+    L1/TEX Hit Rate             %        65.46
+    L2 Hit Rate                 %        92.48
+    Mem Pipes Busy              %        39.17
+    ----------------- ----------- ------------
+
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=4096)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1295467 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      2.4685 ms
+  Bandwidth: 13.29 GB/s
+  GFLOPS:    3.25
+==PROF== Disconnected from process 1295467
+[1295467] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (7807, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       258.98
+    Mem Busy                    %        36.61
+    Max Bandwidth               %        32.79
+    L1/TEX Hit Rate             %        64.36
+    L2 Hit Rate                 %        57.76
+    Mem Pipes Busy              %        33.27
+    ----------------- ----------- ------------
+
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1295526 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      2.3253 ms
+  Bandwidth: 9.22 GB/s
+  GFLOPS:    2.24
+==PROF== Disconnected from process 1295526
+[1295526] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (6542, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       207.65
+    Mem Busy                    %        36.44
+    Max Bandwidth               %        32.77
+    L1/TEX Hit Rate             %        67.35
+    L2 Hit Rate                 %        63.85
+    Mem Pipes Busy              %        33.26
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1295587 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      2.5547 ms
+  Bandwidth: 7.20 GB/s
+  GFLOPS:    1.67
+==PROF== Disconnected from process 1295587
+[1295587] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (14135, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       104.42
+    Mem Busy                    %        42.44
+    Max Bandwidth               %        37.35
+    L1/TEX Hit Rate             %        74.32
+    L2 Hit Rate                 %        82.79
+    Mem Pipes Busy              %        37.95
+    ----------------- ----------- ------------
+
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1295647 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      4.3864 ms
+  Bandwidth: 54.33 GB/s
+  GFLOPS:    12.85
+==PROF== Disconnected from process 1295647
+[1295647] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (132800, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s       137.74
+    Mem Busy                    %        43.59
+    Max Bandwidth               %        37.25
+    L1/TEX Hit Rate             %        74.75
+    L2 Hit Rate                 %        74.92
+    Mem Pipes Busy              %        37.86
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1295707 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      5.7115 ms
+  Bandwidth: 11.89 GB/s
+  GFLOPS:    1.94
+==PROF== Disconnected from process 1295707
+[1295707] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (246411, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        23.62
+    Mem Busy                    %        43.23
+    Max Bandwidth               %        40.73
+    L1/TEX Hit Rate             %        81.74
+    L2 Hit Rate                 %        96.27
+    Mem Pipes Busy              %        41.39
+    ----------------- ----------- ------------
+
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1295768 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      4.8023 ms
+  Bandwidth: 9.88 GB/s
+  GFLOPS:    1.60
+==PROF== Disconnected from process 1295768
+[1295768] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (174173, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        23.22
+    Mem Busy                    %        42.73
+    Max Bandwidth               %        40.26
+    L1/TEX Hit Rate             %        81.90
+    L2 Hit Rate                 %        96.26
+    Mem Pipes Busy              %        40.91
+    ----------------- ----------- ------------
+
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1295827 (/home/users/mschpc/2025/yaoco/Dissertation/hilbertSpmv/build/sharedCsr)
+==PROF== Profiling "sharedMemCsrSpmv" - 0 (1/1): 0%....50%....100% - 17 passes
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      4.3094 ms
+  Bandwidth: 14.25 GB/s
+  GFLOPS:    2.77
+==PROF== Disconnected from process 1295827
+[1295827] sharedCsr@127.0.0.1
+  sharedMemCsrSpmv(const int *, const int *, const float *, const float *, float *, int, int, int) (141862, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 7.0
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        41.54
+    Mem Busy                    %        43.49
+    Max Bandwidth               %        39.62
+    L1/TEX Hit Rate             %        75.90
+    L2 Hit Rate                 %        93.70
+    Mem Pipes Busy              %        40.25
+    ----------------- ----------- ------------
+
+
