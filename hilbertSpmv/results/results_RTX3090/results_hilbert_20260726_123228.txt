@@ -1,0 +1,3838 @@
+Sun Jul 26 12:32:28 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.43.02     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 3090        Off |   00000000:21:00.0 Off |                  N/A |
+|  0%   51C    P8             22W /  370W |       1MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Start time: Sun 26 Jul 12:32:28 IST 2026
+
+==========================================
+ Phase 1: Benchmark Runs
+==========================================
+------------------------------------------
+ rowReorder
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+
+Preprocessing (row reorder): 19.97 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1531 ms  |  BW: 214.35 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1553 ms  |  BW: 211.23 GB/s  |  Speedup vs [1]: 0.985x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0453 ms  |  BW: 723.89 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0465 ms  |  BW: 705.72 GB/s  |  Speedup vs [3]: 0.975x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0527 ms  |  BW: 622.49 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0537 ms  |  BW: 610.86 GB/s  |  Speedup vs [5]: 0.981x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 19.97 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1531 ms    0.1553 ms     0.985x
+Warp                    0.0453 ms    0.0465 ms     0.975x
+Shared                  0.0527 ms    0.0537 ms     0.981x
+
+Kernel-level comparison（Baseline = Naive original 0.1531 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   3.377x
+  Warp   reordered:  3.292x
+  Shared original:   2.904x
+  Shared reordered:  2.850x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+
+Preprocessing (row reorder): 15.10 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0807 ms  |  BW: 265.59 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0794 ms  |  BW: 269.87 GB/s  |  Speedup vs [1]: 1.016x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0320 ms  |  BW: 669.28 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0319 ms  |  BW: 670.99 GB/s  |  Speedup vs [3]: 1.003x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0409 ms  |  BW: 523.33 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0416 ms  |  BW: 515.09 GB/s  |  Speedup vs [5]: 0.984x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 15.10 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0807 ms    0.0794 ms     1.016x
+Warp                    0.0320 ms    0.0319 ms     1.003x
+Shared                  0.0409 ms    0.0416 ms     0.984x
+
+Kernel-level comparison（Baseline = Naive original 0.0807 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   2.520x
+  Warp   reordered:  2.526x
+  Shared original:   1.970x
+  Shared reordered:  1.939x
+
+Naive break-even: 11801 iterations
+Warp break-even: 185064 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+
+Preprocessing (row reorder): 20.76 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4055 ms  |  BW: 45.36 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3961 ms  |  BW: 46.43 GB/s  |  Speedup vs [1]: 1.024x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0426 ms  |  BW: 431.36 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0535 ms  |  BW: 343.84 GB/s  |  Speedup vs [3]: 0.797x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0656 ms  |  BW: 280.17 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0961 ms  |  BW: 191.41 GB/s  |  Speedup vs [5]: 0.683x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 20.76 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4055 ms    0.3961 ms     1.024x
+Warp                    0.0426 ms    0.0535 ms     0.797x
+Shared                  0.0656 ms    0.0961 ms     0.683x
+
+Kernel-level comparison（Baseline = Naive original 0.4055 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   9.510x
+  Warp   reordered:  7.580x
+  Shared original:   6.177x
+  Shared reordered:  4.220x
+
+Naive break-even: 2216 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+
+Preprocessing (row reorder): 148.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6855 ms  |  BW: 347.60 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6787 ms  |  BW: 351.08 GB/s  |  Speedup vs [1]: 1.010x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4203 ms  |  BW: 566.92 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4144 ms  |  BW: 574.98 GB/s  |  Speedup vs [3]: 1.014x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6168 ms  |  BW: 386.36 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.5638 ms  |  BW: 422.64 GB/s  |  Speedup vs [5]: 1.094x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 148.82 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6855 ms    0.6787 ms     1.010x
+Warp                    0.4203 ms    0.4144 ms     1.014x
+Shared                  0.6168 ms    0.5638 ms     1.094x
+
+Kernel-level comparison（Baseline = Naive original 0.6855 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   1.631x
+  Warp   reordered:  1.654x
+  Shared original:   1.112x
+  Shared reordered:  1.216x
+
+Naive break-even: 21921 iterations
+Warp break-even: 25281 iterations
+Shared break-even: 2811 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+
+Preprocessing (row reorder): 200.99 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0840 ms  |  BW: 808.60 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0851 ms  |  BW: 798.57 GB/s  |  Speedup vs [1]: 0.988x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6006 ms  |  BW: 113.08 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6027 ms  |  BW: 112.70 GB/s  |  Speedup vs [3]: 0.997x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9486 ms  |  BW: 71.60 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9659 ms  |  BW: 70.32 GB/s  |  Speedup vs [5]: 0.982x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 200.99 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0840 ms    0.0851 ms     0.988x
+Warp                    0.6006 ms    0.6027 ms     0.997x
+Shared                  0.9486 ms    0.9659 ms     0.982x
+
+Kernel-level comparison（Baseline = Naive original 0.0840 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   0.140x
+  Warp   reordered:  0.139x
+  Shared original:   0.089x
+  Shared reordered:  0.087x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+
+Preprocessing (row reorder): 137.13 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.58 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0608 ms  |  BW: 780.38 GB/s  |  Speedup vs [1]: 0.986x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4254 ms  |  BW: 111.57 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4269 ms  |  BW: 111.19 GB/s  |  Speedup vs [3]: 0.997x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6753 ms  |  BW: 70.29 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6829 ms  |  BW: 69.51 GB/s  |  Speedup vs [5]: 0.989x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 137.13 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms    0.0608 ms     0.986x
+Warp                    0.4254 ms    0.4269 ms     0.997x
+Shared                  0.6753 ms    0.6829 ms     0.989x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   0.141x
+  Warp   reordered:  0.140x
+  Shared original:   0.089x
+  Shared reordered:  0.088x
+
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+
+Preprocessing (row reorder): 168.01 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6886 ms  |  BW: 36.37 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.4361 ms  |  BW: 42.77 GB/s  |  Speedup vs [1]: 1.176x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3662 ms  |  BW: 167.71 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3581 ms  |  BW: 171.50 GB/s  |  Speedup vs [3]: 1.023x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5866 ms  |  BW: 104.70 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5968 ms  |  BW: 102.92 GB/s  |  Speedup vs [5]: 0.983x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 168.01 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6886 ms    1.4361 ms     1.176x
+Warp                    0.3662 ms    0.3581 ms     1.023x
+Shared                  0.5866 ms    0.5968 ms     0.983x
+
+Kernel-level comparison（Baseline = Naive original 1.6886 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   4.611x
+  Warp   reordered:  4.715x
+  Shared original:   2.879x
+  Shared reordered:  2.829x
+
+Naive break-even: 665 iterations
+Warp break-even: 20798 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ blockedHilbert (B=256)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 256  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=256): 22.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1564 ms  |  BW: 209.82 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1573 ms  |  BW: 208.59 GB/s  |  Speedup vs [1]: 0.994x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0441 ms  |  BW: 743.38 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0450 ms  |  BW: 729.83 GB/s  |  Speedup vs [3]: 0.982x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0504 ms  |  BW: 651.21 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0514 ms  |  BW: 638.24 GB/s  |  Speedup vs [5]: 0.980x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 22.41 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1564 ms      0.1573 ms     0.994x
+Warp                    0.0441 ms      0.0450 ms     0.982x
+Shared                  0.0504 ms      0.0514 ms     0.980x
+
+Kernel-level comparison（Baseline = Naive original 0.1564 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.543x
+  Warp   BH-reorder:  3.478x
+  Shared original:    3.104x
+  Shared BH-reorder:  3.042x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 256  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=256): 16.19 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0811 ms  |  BW: 264.24 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0758 ms  |  BW: 282.81 GB/s  |  Speedup vs [1]: 1.070x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0312 ms  |  BW: 686.66 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0305 ms  |  BW: 702.28 GB/s  |  Speedup vs [3]: 1.023x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0387 ms  |  BW: 553.65 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0387 ms  |  BW: 553.65 GB/s  |  Speedup vs [5]: 1.000x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 16.19 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0811 ms      0.0758 ms     1.070x
+Warp                    0.0312 ms      0.0305 ms     1.023x
+Shared                  0.0387 ms      0.0387 ms     1.000x
+
+Kernel-level comparison（Baseline = Naive original 0.0811 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.599x
+  Warp   BH-reorder:  2.658x
+  Shared original:    2.095x
+  Shared BH-reorder:  2.095x
+
+Naive break-even: 3040 iterations
+Warp break-even: 23312 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 256  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=256): 23.08 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4054 ms  |  BW: 45.37 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3946 ms  |  BW: 46.61 GB/s  |  Speedup vs [1]: 1.027x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0429 ms  |  BW: 428.71 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0426 ms  |  BW: 431.77 GB/s  |  Speedup vs [3]: 1.007x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0658 ms  |  BW: 279.34 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0754 ms  |  BW: 244.05 GB/s  |  Speedup vs [5]: 0.874x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 23.08 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4054 ms      0.3946 ms     1.027x
+Warp                    0.0429 ms      0.0426 ms     1.007x
+Shared                  0.0658 ms      0.0754 ms     0.874x
+
+Kernel-level comparison（Baseline = Naive original 0.4054 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.449x
+  Warp   BH-reorder:  9.517x
+  Shared original:    6.157x
+  Shared BH-reorder:  5.379x
+
+Naive break-even: 2147 iterations
+Warp break-even: 75925 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 185.20 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6880 ms  |  BW: 346.34 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7133 ms  |  BW: 334.06 GB/s  |  Speedup vs [1]: 0.965x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4210 ms  |  BW: 566.06 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4143 ms  |  BW: 575.13 GB/s  |  Speedup vs [3]: 1.016x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6566 ms  |  BW: 362.92 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6245 ms  |  BW: 381.55 GB/s  |  Speedup vs [5]: 1.051x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 185.20 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6880 ms      0.7133 ms     0.965x
+Warp                    0.4210 ms      0.4143 ms     1.016x
+Shared                  0.6566 ms      0.6245 ms     1.051x
+
+Kernel-level comparison（Baseline = Naive original 0.6880 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.634x
+  Warp   BH-reorder:  1.661x
+  Shared original:    1.048x
+  Shared BH-reorder:  1.102x
+
+Warp break-even: 27891 iterations
+Shared break-even: 5778 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 267.46 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0858 ms  |  BW: 791.52 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0857 ms  |  BW: 792.46 GB/s  |  Speedup vs [1]: 1.001x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6455 ms  |  BW: 105.22 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6437 ms  |  BW: 105.52 GB/s  |  Speedup vs [3]: 1.003x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0290 ms  |  BW: 66.01 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9901 ms  |  BW: 68.60 GB/s  |  Speedup vs [5]: 1.039x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 267.46 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0858 ms      0.0857 ms     1.001x
+Warp                    0.6455 ms      0.6437 ms     1.003x
+Shared                  1.0290 ms      0.9901 ms     1.039x
+
+Kernel-level comparison（Baseline = Naive original 0.0858 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.133x
+  Warp   BH-reorder:  0.133x
+  Shared original:    0.083x
+  Shared BH-reorder:  0.087x
+
+Naive break-even: 2612092 iterations
+Warp break-even: 145106 iterations
+Shared break-even: 6876 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 170.27 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0616 ms  |  BW: 770.01 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0622 ms  |  BW: 763.67 GB/s  |  Speedup vs [1]: 0.992x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4575 ms  |  BW: 103.75 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4565 ms  |  BW: 103.98 GB/s  |  Speedup vs [3]: 1.002x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7328 ms  |  BW: 64.78 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7163 ms  |  BW: 66.27 GB/s  |  Speedup vs [5]: 1.023x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 170.27 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0616 ms      0.0622 ms     0.992x
+Warp                    0.4575 ms      0.4565 ms     1.002x
+Shared                  0.7328 ms      0.7163 ms     1.023x
+
+Kernel-level comparison（Baseline = Naive original 0.0616 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.135x
+  Warp   BH-reorder:  0.135x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Warp break-even: 166797 iterations
+Shared break-even: 10328 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 186.86 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7911 ms  |  BW: 34.29 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8379 ms  |  BW: 33.42 GB/s  |  Speedup vs [1]: 0.975x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3939 ms  |  BW: 155.92 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3835 ms  |  BW: 160.16 GB/s  |  Speedup vs [3]: 1.027x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6375 ms  |  BW: 96.34 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6404 ms  |  BW: 95.91 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 186.86 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.7911 ms      1.8379 ms     0.975x
+Warp                    0.3939 ms      0.3835 ms     1.027x
+Shared                  0.6375 ms      0.6404 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 1.7911 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.547x
+  Warp   BH-reorder:  4.670x
+  Shared original:    2.809x
+  Shared BH-reorder:  2.797x
+
+Warp break-even: 17890 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ blockedHilbert (B=512)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 512  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=512): 23.05 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1531 ms  |  BW: 214.31 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1555 ms  |  BW: 210.93 GB/s  |  Speedup vs [1]: 0.984x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0456 ms  |  BW: 719.99 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0470 ms  |  BW: 698.36 GB/s  |  Speedup vs [3]: 0.970x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0527 ms  |  BW: 622.13 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0542 ms  |  BW: 605.66 GB/s  |  Speedup vs [5]: 0.974x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 23.05 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1531 ms      0.1555 ms     0.984x
+Warp                    0.0456 ms      0.0470 ms     0.970x
+Shared                  0.0527 ms      0.0542 ms     0.974x
+
+Kernel-level comparison（Baseline = Naive original 0.1531 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.360x
+  Warp   BH-reorder:  3.259x
+  Shared original:    2.903x
+  Shared BH-reorder:  2.826x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 512  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=512): 15.99 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0813 ms  |  BW: 263.58 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0765 ms  |  BW: 280.18 GB/s  |  Speedup vs [1]: 1.063x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0321 ms  |  BW: 666.76 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0328 ms  |  BW: 654.00 GB/s  |  Speedup vs [3]: 0.981x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0409 ms  |  BW: 523.45 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0413 ms  |  BW: 519.31 GB/s  |  Speedup vs [5]: 0.992x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 15.99 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0813 ms      0.0765 ms     1.063x
+Warp                    0.0321 ms      0.0328 ms     0.981x
+Shared                  0.0409 ms      0.0413 ms     0.992x
+
+Kernel-level comparison（Baseline = Naive original 0.0813 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.530x
+  Warp   BH-reorder:  2.481x
+  Shared original:    1.986x
+  Shared BH-reorder:  1.970x
+
+Naive break-even: 3318 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 512  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=512): 22.91 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4058 ms  |  BW: 45.32 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3946 ms  |  BW: 46.61 GB/s  |  Speedup vs [1]: 1.028x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0429 ms  |  BW: 428.68 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0428 ms  |  BW: 429.77 GB/s  |  Speedup vs [3]: 1.003x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0657 ms  |  BW: 279.78 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0758 ms  |  BW: 242.73 GB/s  |  Speedup vs [5]: 0.868x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 22.91 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4058 ms      0.3946 ms     1.028x
+Warp                    0.0429 ms      0.0428 ms     1.003x
+Shared                  0.0657 ms      0.0758 ms     0.868x
+
+Kernel-level comparison（Baseline = Naive original 0.4058 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.458x
+  Warp   BH-reorder:  9.482x
+  Shared original:    6.173x
+  Shared BH-reorder:  5.355x
+
+Naive break-even: 2053 iterations
+Warp break-even: 210599 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 182.43 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6905 ms  |  BW: 345.11 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7063 ms  |  BW: 337.40 GB/s  |  Speedup vs [1]: 0.978x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4204 ms  |  BW: 566.88 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4145 ms  |  BW: 574.86 GB/s  |  Speedup vs [3]: 1.014x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6569 ms  |  BW: 362.75 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6247 ms  |  BW: 381.43 GB/s  |  Speedup vs [5]: 1.051x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 182.43 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6905 ms      0.7063 ms     0.978x
+Warp                    0.4204 ms      0.4145 ms     1.014x
+Shared                  0.6569 ms      0.6247 ms     1.051x
+
+Kernel-level comparison（Baseline = Naive original 0.6905 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.643x
+  Warp   BH-reorder:  1.666x
+  Shared original:    1.051x
+  Shared BH-reorder:  1.105x
+
+Warp break-even: 31255 iterations
+Shared break-even: 5672 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 262.92 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0857 ms  |  BW: 792.46 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0857 ms  |  BW: 792.46 GB/s  |  Speedup vs [1]: 1.000x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6453 ms  |  BW: 105.25 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6442 ms  |  BW: 105.44 GB/s  |  Speedup vs [3]: 1.002x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0290 ms  |  BW: 66.01 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9907 ms  |  BW: 68.56 GB/s  |  Speedup vs [5]: 1.039x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 262.92 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0857 ms      0.0857 ms     1.000x
+Warp                    0.6453 ms      0.6442 ms     1.002x
+Shared                  1.0290 ms      0.9907 ms     1.039x
+
+Kernel-level comparison（Baseline = Naive original 0.0857 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.133x
+  Warp   BH-reorder:  0.133x
+  Shared original:    0.083x
+  Shared BH-reorder:  0.087x
+
+Warp break-even: 233416 iterations
+Shared break-even: 6865 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 171.60 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0615 ms  |  BW: 771.29 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0623 ms  |  BW: 762.41 GB/s  |  Speedup vs [1]: 0.988x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4575 ms  |  BW: 103.75 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4570 ms  |  BW: 103.86 GB/s  |  Speedup vs [3]: 1.001x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7326 ms  |  BW: 64.80 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7167 ms  |  BW: 66.23 GB/s  |  Speedup vs [5]: 1.022x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 171.60 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0615 ms      0.0623 ms     0.988x
+Warp                    0.4575 ms      0.4570 ms     1.001x
+Shared                  0.7326 ms      0.7167 ms     1.022x
+
+Kernel-level comparison（Baseline = Naive original 0.0615 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.135x
+  Warp   BH-reorder:  0.135x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Warp break-even: 335167 iterations
+Shared break-even: 10813 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 184.56 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7908 ms  |  BW: 34.30 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8432 ms  |  BW: 33.32 GB/s  |  Speedup vs [1]: 0.972x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3938 ms  |  BW: 155.96 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3833 ms  |  BW: 160.25 GB/s  |  Speedup vs [3]: 1.028x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6376 ms  |  BW: 96.33 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6399 ms  |  BW: 95.99 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 184.56 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.7908 ms      1.8432 ms     0.972x
+Warp                    0.3938 ms      0.3833 ms     1.028x
+Shared                  0.6376 ms      0.6399 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 1.7908 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.547x
+  Warp   BH-reorder:  4.672x
+  Shared original:    2.808x
+  Shared BH-reorder:  2.799x
+
+Warp break-even: 17499 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ blockedHilbert (B=1024)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 1024  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=1024): 23.44 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1535 ms  |  BW: 213.74 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1555 ms  |  BW: 210.93 GB/s  |  Speedup vs [1]: 0.987x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0457 ms  |  BW: 718.38 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0468 ms  |  BW: 700.80 GB/s  |  Speedup vs [3]: 0.976x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0528 ms  |  BW: 620.92 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0542 ms  |  BW: 605.66 GB/s  |  Speedup vs [5]: 0.975x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 23.44 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1535 ms      0.1555 ms     0.987x
+Warp                    0.0457 ms      0.0468 ms     0.976x
+Shared                  0.0528 ms      0.0542 ms     0.975x
+
+Kernel-level comparison（Baseline = Naive original 0.1535 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.361x
+  Warp   BH-reorder:  3.279x
+  Shared original:    2.905x
+  Shared BH-reorder:  2.834x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 1024  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=1024): 15.85 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0812 ms  |  BW: 263.91 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0768 ms  |  BW: 279.04 GB/s  |  Speedup vs [1]: 1.057x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0322 ms  |  BW: 666.50 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0316 ms  |  BW: 677.28 GB/s  |  Speedup vs [3]: 1.016x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0411 ms  |  BW: 521.90 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0415 ms  |  BW: 516.74 GB/s  |  Speedup vs [5]: 0.990x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 15.85 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0812 ms      0.0768 ms     1.057x
+Warp                    0.0322 ms      0.0316 ms     1.016x
+Shared                  0.0411 ms      0.0415 ms     0.990x
+
+Kernel-level comparison（Baseline = Naive original 0.0812 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.525x
+  Warp   BH-reorder:  2.566x
+  Shared original:    1.978x
+  Shared BH-reorder:  1.958x
+
+Naive break-even: 3600 iterations
+Warp break-even: 30962 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 1024  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=1024): 22.72 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4057 ms  |  BW: 45.34 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3956 ms  |  BW: 46.50 GB/s  |  Speedup vs [1]: 1.026x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0429 ms  |  BW: 428.68 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0430 ms  |  BW: 427.66 GB/s  |  Speedup vs [3]: 0.998x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0658 ms  |  BW: 279.74 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0764 ms  |  BW: 240.73 GB/s  |  Speedup vs [5]: 0.861x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 22.72 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4057 ms      0.3956 ms     1.026x
+Warp                    0.0429 ms      0.0430 ms     0.998x
+Shared                  0.0658 ms      0.0764 ms     0.861x
+
+Kernel-level comparison（Baseline = Naive original 0.4057 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.456x
+  Warp   BH-reorder:  9.433x
+  Shared original:    6.170x
+  Shared BH-reorder:  5.310x
+
+Naive break-even: 2241 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 183.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6873 ms  |  BW: 346.70 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7074 ms  |  BW: 336.88 GB/s  |  Speedup vs [1]: 0.972x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4209 ms  |  BW: 566.19 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4150 ms  |  BW: 574.16 GB/s  |  Speedup vs [3]: 1.014x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6578 ms  |  BW: 362.24 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6256 ms  |  BW: 380.92 GB/s  |  Speedup vs [5]: 1.052x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 183.41 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6873 ms      0.7074 ms     0.972x
+Warp                    0.4209 ms      0.4150 ms     1.014x
+Shared                  0.6578 ms      0.6256 ms     1.052x
+
+Kernel-level comparison（Baseline = Naive original 0.6873 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.633x
+  Warp   BH-reorder:  1.656x
+  Shared original:    1.045x
+  Shared BH-reorder:  1.099x
+
+Warp break-even: 31424 iterations
+Shared break-even: 5686 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 266.75 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0857 ms  |  BW: 792.46 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0857 ms  |  BW: 792.46 GB/s  |  Speedup vs [1]: 1.000x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6454 ms  |  BW: 105.24 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6448 ms  |  BW: 105.33 GB/s  |  Speedup vs [3]: 1.001x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0290 ms  |  BW: 66.01 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9910 ms  |  BW: 68.54 GB/s  |  Speedup vs [5]: 1.038x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 266.75 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0857 ms      0.0857 ms     1.000x
+Warp                    0.6454 ms      0.6448 ms     1.001x
+Shared                  1.0290 ms      0.9910 ms     1.038x
+
+Kernel-level comparison（Baseline = Naive original 0.0857 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.133x
+  Warp   BH-reorder:  0.133x
+  Shared original:    0.083x
+  Shared BH-reorder:  0.086x
+
+Warp break-even: 453065 iterations
+Shared break-even: 7022 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 171.78 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0615 ms  |  BW: 771.29 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0624 ms  |  BW: 761.28 GB/s  |  Speedup vs [1]: 0.987x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4576 ms  |  BW: 103.73 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4576 ms  |  BW: 103.73 GB/s  |  Speedup vs [3]: 1.000x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7329 ms  |  BW: 64.77 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7173 ms  |  BW: 66.17 GB/s  |  Speedup vs [5]: 1.022x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 171.78 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0615 ms      0.0624 ms     0.987x
+Warp                    0.4576 ms      0.4576 ms     1.000x
+Shared                  0.7329 ms      0.7173 ms     1.022x
+
+Kernel-level comparison（Baseline = Naive original 0.0615 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.134x
+  Warp   BH-reorder:  0.134x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Warp break-even: 26934228 iterations
+Shared break-even: 11036 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 183.16 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7909 ms  |  BW: 34.30 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8183 ms  |  BW: 33.78 GB/s  |  Speedup vs [1]: 0.985x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3939 ms  |  BW: 155.92 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3833 ms  |  BW: 160.25 GB/s  |  Speedup vs [3]: 1.028x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6373 ms  |  BW: 96.37 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6402 ms  |  BW: 95.94 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 183.16 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.7909 ms      1.8183 ms     0.985x
+Warp                    0.3939 ms      0.3833 ms     1.028x
+Shared                  0.6373 ms      0.6402 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 1.7909 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.546x
+  Warp   BH-reorder:  4.672x
+  Shared original:    2.810x
+  Shared BH-reorder:  2.797x
+
+Warp break-even: 17199 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ blockedHilbert (B=2048)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 2048  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=2048): 23.89 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1535 ms  |  BW: 213.74 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1551 ms  |  BW: 211.48 GB/s  |  Speedup vs [1]: 0.989x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0456 ms  |  BW: 719.99 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0466 ms  |  BW: 704.17 GB/s  |  Speedup vs [3]: 0.978x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0528 ms  |  BW: 620.92 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0541 ms  |  BW: 606.81 GB/s  |  Speedup vs [5]: 0.977x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 23.89 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1535 ms      0.1551 ms     0.989x
+Warp                    0.0456 ms      0.0466 ms     0.978x
+Shared                  0.0528 ms      0.0541 ms     0.977x
+
+Kernel-level comparison（Baseline = Naive original 0.1535 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.369x
+  Warp   BH-reorder:  3.295x
+  Shared original:    2.905x
+  Shared BH-reorder:  2.839x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 2048  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=2048): 15.83 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0810 ms  |  BW: 264.58 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0776 ms  |  BW: 276.10 GB/s  |  Speedup vs [1]: 1.044x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0321 ms  |  BW: 666.90 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0317 ms  |  BW: 675.10 GB/s  |  Speedup vs [3]: 1.012x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0412 ms  |  BW: 520.60 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0416 ms  |  BW: 515.47 GB/s  |  Speedup vs [5]: 0.990x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 15.83 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0810 ms      0.0776 ms     1.044x
+Warp                    0.0321 ms      0.0317 ms     1.012x
+Shared                  0.0412 ms      0.0416 ms     0.990x
+
+Kernel-level comparison（Baseline = Naive original 0.0810 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.521x
+  Warp   BH-reorder:  2.552x
+  Shared original:    1.968x
+  Shared BH-reorder:  1.948x
+
+Naive break-even: 4684 iterations
+Warp break-even: 40540 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 2048  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=2048): 22.59 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4054 ms  |  BW: 45.37 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4488 ms  |  BW: 40.98 GB/s  |  Speedup vs [1]: 0.903x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0428 ms  |  BW: 429.71 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0433 ms  |  BW: 424.63 GB/s  |  Speedup vs [3]: 0.988x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0658 ms  |  BW: 279.34 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0761 ms  |  BW: 241.73 GB/s  |  Speedup vs [5]: 0.865x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 22.59 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4054 ms      0.4488 ms     0.903x
+Warp                    0.0428 ms      0.0433 ms     0.988x
+Shared                  0.0658 ms      0.0761 ms     0.865x
+
+Kernel-level comparison（Baseline = Naive original 0.4054 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.471x
+  Warp   BH-reorder:  9.359x
+  Shared original:    6.157x
+  Shared BH-reorder:  5.328x
+
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 183.94 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6867 ms  |  BW: 347.01 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7134 ms  |  BW: 334.01 GB/s  |  Speedup vs [1]: 0.963x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4208 ms  |  BW: 566.33 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4147 ms  |  BW: 574.58 GB/s  |  Speedup vs [3]: 1.015x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6572 ms  |  BW: 362.58 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6261 ms  |  BW: 380.61 GB/s  |  Speedup vs [5]: 1.050x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 183.94 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6867 ms      0.7134 ms     0.963x
+Warp                    0.4208 ms      0.4147 ms     1.015x
+Shared                  0.6572 ms      0.6261 ms     1.050x
+
+Kernel-level comparison（Baseline = Naive original 0.6867 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.632x
+  Warp   BH-reorder:  1.656x
+  Shared original:    1.045x
+  Shared BH-reorder:  1.097x
+
+Warp break-even: 30446 iterations
+Shared break-even: 5908 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 259.54 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0860 ms  |  BW: 789.63 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0861 ms  |  BW: 788.69 GB/s  |  Speedup vs [1]: 0.999x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6455 ms  |  BW: 105.22 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6452 ms  |  BW: 105.27 GB/s  |  Speedup vs [3]: 1.000x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0289 ms  |  BW: 66.01 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9924 ms  |  BW: 68.44 GB/s  |  Speedup vs [5]: 1.037x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 259.54 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0860 ms      0.0861 ms     0.999x
+Warp                    0.6455 ms      0.6452 ms     1.000x
+Shared                  1.0289 ms      0.9924 ms     1.037x
+
+Kernel-level comparison（Baseline = Naive original 0.0860 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.133x
+  Warp   BH-reorder:  0.133x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.087x
+
+Warp break-even: 844686 iterations
+Shared break-even: 7100 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 166.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0615 ms  |  BW: 771.29 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0624 ms  |  BW: 761.16 GB/s  |  Speedup vs [1]: 0.987x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4577 ms  |  BW: 103.70 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4580 ms  |  BW: 103.63 GB/s  |  Speedup vs [3]: 0.999x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7330 ms  |  BW: 64.76 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7183 ms  |  BW: 66.08 GB/s  |  Speedup vs [5]: 1.020x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 166.82 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0615 ms      0.0624 ms     0.987x
+Warp                    0.4577 ms      0.4580 ms     0.999x
+Shared                  0.7330 ms      0.7183 ms     1.020x
+
+Kernel-level comparison（Baseline = Naive original 0.0615 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.134x
+  Warp   BH-reorder:  0.134x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Shared break-even: 11397 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 182.29 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7906 ms  |  BW: 34.30 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5513 ms  |  BW: 39.59 GB/s  |  Speedup vs [1]: 1.154x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3938 ms  |  BW: 155.96 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3834 ms  |  BW: 160.21 GB/s  |  Speedup vs [3]: 1.027x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6376 ms  |  BW: 96.32 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6401 ms  |  BW: 95.95 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 182.29 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.7906 ms      1.5513 ms     1.154x
+Warp                    0.3938 ms      0.3834 ms     1.027x
+Shared                  0.6376 ms      0.6401 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 1.7906 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.547x
+  Warp   BH-reorder:  4.670x
+  Shared original:    2.808x
+  Shared BH-reorder:  2.797x
+
+Naive break-even: 762 iterations
+Warp break-even: 17453 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ blockedHilbert (B=4096)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 4096  (Hilbert grid: 16 x 16)
+
+Preprocessing (blocked Hilbert, B=4096): 23.40 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1533 ms  |  BW: 214.02 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1555 ms  |  BW: 210.93 GB/s  |  Speedup vs [1]: 0.986x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0453 ms  |  BW: 723.50 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0466 ms  |  BW: 703.78 GB/s  |  Speedup vs [3]: 0.973x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0529 ms  |  BW: 619.83 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0542 ms  |  BW: 605.63 GB/s  |  Speedup vs [5]: 0.977x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 23.40 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1533 ms      0.1555 ms     0.986x
+Warp                    0.0453 ms      0.0466 ms     0.973x
+Shared                  0.0529 ms      0.0542 ms     0.977x
+
+Kernel-level comparison（Baseline = Naive original 0.1533 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.380x
+  Warp   BH-reorder:  3.288x
+  Shared original:    2.896x
+  Shared BH-reorder:  2.830x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 4096  (Hilbert grid: 16 x 16)
+
+Preprocessing (blocked Hilbert, B=4096): 15.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0811 ms  |  BW: 264.24 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0759 ms  |  BW: 282.42 GB/s  |  Speedup vs [1]: 1.069x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0322 ms  |  BW: 666.17 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0318 ms  |  BW: 672.93 GB/s  |  Speedup vs [3]: 1.010x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0412 ms  |  BW: 520.60 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0417 ms  |  BW: 514.20 GB/s  |  Speedup vs [5]: 0.988x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 15.82 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0811 ms      0.0759 ms     1.069x
+Warp                    0.0322 ms      0.0318 ms     1.010x
+Shared                  0.0412 ms      0.0417 ms     0.988x
+
+Kernel-level comparison（Baseline = Naive original 0.0811 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.521x
+  Warp   BH-reorder:  2.547x
+  Shared original:    1.970x
+  Shared BH-reorder:  1.946x
+
+Naive break-even: 3032 iterations
+Warp break-even: 48961 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 4096  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=4096): 22.65 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4057 ms  |  BW: 45.34 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3926 ms  |  BW: 46.85 GB/s  |  Speedup vs [1]: 1.033x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0429 ms  |  BW: 428.68 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0435 ms  |  BW: 422.63 GB/s  |  Speedup vs [3]: 0.986x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0659 ms  |  BW: 278.91 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0769 ms  |  BW: 239.17 GB/s  |  Speedup vs [5]: 0.858x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 22.65 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4057 ms      0.3926 ms     1.033x
+Warp                    0.0429 ms      0.0435 ms     0.986x
+Shared                  0.0659 ms      0.0769 ms     0.858x
+
+Kernel-level comparison（Baseline = Naive original 0.4057 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.456x
+  Warp   BH-reorder:  9.322x
+  Shared original:    6.152x
+  Shared BH-reorder:  5.276x
+
+Naive break-even: 1728 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 181.07 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6849 ms  |  BW: 347.94 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7112 ms  |  BW: 335.08 GB/s  |  Speedup vs [1]: 0.963x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4205 ms  |  BW: 566.74 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4165 ms  |  BW: 572.07 GB/s  |  Speedup vs [3]: 1.009x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6568 ms  |  BW: 362.81 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6256 ms  |  BW: 380.92 GB/s  |  Speedup vs [5]: 1.050x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 181.07 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6849 ms      0.7112 ms     0.963x
+Warp                    0.4205 ms      0.4165 ms     1.009x
+Shared                  0.6568 ms      0.6256 ms     1.050x
+
+Kernel-level comparison（Baseline = Naive original 0.6849 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.629x
+  Warp   BH-reorder:  1.644x
+  Shared original:    1.043x
+  Shared BH-reorder:  1.095x
+
+Warp break-even: 46268 iterations
+Shared break-even: 5798 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 268.49 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0859 ms  |  BW: 790.57 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0866 ms  |  BW: 784.03 GB/s  |  Speedup vs [1]: 0.992x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6455 ms  |  BW: 105.22 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6458 ms  |  BW: 105.17 GB/s  |  Speedup vs [3]: 1.000x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0289 ms  |  BW: 66.01 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9937 ms  |  BW: 68.35 GB/s  |  Speedup vs [5]: 1.035x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 268.49 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0859 ms      0.0866 ms     0.992x
+Warp                    0.6455 ms      0.6458 ms     1.000x
+Shared                  1.0289 ms      0.9937 ms     1.035x
+
+Kernel-level comparison（Baseline = Naive original 0.0859 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.133x
+  Warp   BH-reorder:  0.133x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Shared break-even: 7625 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 167.04 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0616 ms  |  BW: 770.01 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0631 ms  |  BW: 752.51 GB/s  |  Speedup vs [1]: 0.977x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4575 ms  |  BW: 103.75 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4584 ms  |  BW: 103.54 GB/s  |  Speedup vs [3]: 0.998x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7330 ms  |  BW: 64.76 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7199 ms  |  BW: 65.94 GB/s  |  Speedup vs [5]: 1.018x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 167.04 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0616 ms      0.0631 ms     0.977x
+Warp                    0.4575 ms      0.4584 ms     0.998x
+Shared                  0.7330 ms      0.7199 ms     1.018x
+
+Kernel-level comparison（Baseline = Naive original 0.0616 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.135x
+  Warp   BH-reorder:  0.134x
+  Shared original:    0.084x
+  Shared BH-reorder:  0.086x
+
+Shared break-even: 12744 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 180.10 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7897 ms  |  BW: 34.32 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8302 ms  |  BW: 33.56 GB/s  |  Speedup vs [1]: 0.978x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3939 ms  |  BW: 155.92 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3835 ms  |  BW: 160.16 GB/s  |  Speedup vs [3]: 1.027x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6374 ms  |  BW: 96.36 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6401 ms  |  BW: 95.95 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 180.10 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.7897 ms      1.8302 ms     0.978x
+Warp                    0.3939 ms      0.3835 ms     1.027x
+Shared                  0.6374 ms      0.6401 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 1.7897 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.543x
+  Warp   BH-reorder:  4.667x
+  Shared original:    2.808x
+  Shared BH-reorder:  2.796x
+
+Warp break-even: 17243 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ globalHilbert (B=256)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 25.33 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1532 ms  |  BW: 214.18 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1543 ms  |  BW: 212.66 GB/s  |  Speedup vs [1]: 0.993x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0453 ms  |  BW: 724.88 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0462 ms  |  BW: 710.74 GB/s  |  Speedup vs [3]: 0.980x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0526 ms  |  BW: 623.34 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0544 ms  |  BW: 602.59 GB/s  |  Speedup vs [5]: 0.967x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 25.33 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1532 ms      0.1543 ms     0.993x
+Warp                    0.0453 ms      0.0462 ms     0.980x
+Shared                  0.0526 ms      0.0544 ms     0.967x
+
+Kernel-level comparison（Baseline = Naive original 0.1532 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.384x
+  Warp   GH-reorder:  3.318x
+  Shared original:    2.910x
+  Shared GH-reorder:  2.813x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 18.94 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0808 ms  |  BW: 265.22 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0765 ms  |  BW: 280.13 GB/s  |  Speedup vs [1]: 1.056x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0320 ms  |  BW: 669.70 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0321 ms  |  BW: 668.41 GB/s  |  Speedup vs [3]: 0.998x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0409 ms  |  BW: 524.12 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0406 ms  |  BW: 527.29 GB/s  |  Speedup vs [5]: 1.006x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 18.94 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0808 ms      0.0765 ms     1.056x
+Warp                    0.0320 ms      0.0321 ms     0.998x
+Shared                  0.0409 ms      0.0406 ms     1.006x
+
+Kernel-level comparison（Baseline = Naive original 0.0808 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.525x
+  Warp   GH-reorder:  2.520x
+  Shared original:    1.976x
+  Shared GH-reorder:  1.988x
+
+Naive break-even: 4407 iterations
+Shared break-even: 76985 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 26.24 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4064 ms  |  BW: 45.26 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3791 ms  |  BW: 48.51 GB/s  |  Speedup vs [1]: 1.072x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0427 ms  |  BW: 430.74 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0443 ms  |  BW: 415.59 GB/s  |  Speedup vs [3]: 0.965x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0660 ms  |  BW: 278.69 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0758 ms  |  BW: 242.53 GB/s  |  Speedup vs [5]: 0.870x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 26.24 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4064 ms      0.3791 ms     1.072x
+Warp                    0.0427 ms      0.0443 ms     0.965x
+Shared                  0.0660 ms      0.0758 ms     0.870x
+
+Kernel-level comparison（Baseline = Naive original 0.4064 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.517x
+  Warp   GH-reorder:  9.183x
+  Shared original:    6.158x
+  Shared GH-reorder:  5.359x
+
+Naive break-even: 962 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 200.53 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6851 ms  |  BW: 347.81 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7133 ms  |  BW: 334.08 GB/s  |  Speedup vs [1]: 0.961x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4053 ms  |  BW: 587.94 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4003 ms  |  BW: 595.26 GB/s  |  Speedup vs [3]: 1.012x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6179 ms  |  BW: 385.65 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6104 ms  |  BW: 390.37 GB/s  |  Speedup vs [5]: 1.012x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 200.53 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6851 ms      0.7133 ms     0.961x
+Warp                    0.4053 ms      0.4003 ms     1.012x
+Shared                  0.6179 ms      0.6104 ms     1.012x
+
+Kernel-level comparison（Baseline = Naive original 0.6851 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.690x
+  Warp   GH-reorder:  1.711x
+  Shared original:    1.109x
+  Shared GH-reorder:  1.122x
+
+Warp break-even: 40212 iterations
+Shared break-even: 26863 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 282.86 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0840 ms  |  BW: 808.79 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0844 ms  |  BW: 804.47 GB/s  |  Speedup vs [1]: 0.995x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5969 ms  |  BW: 113.80 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5998 ms  |  BW: 113.24 GB/s  |  Speedup vs [3]: 0.995x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9422 ms  |  BW: 72.09 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9469 ms  |  BW: 71.73 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 282.86 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0840 ms      0.0844 ms     0.995x
+Warp                    0.5969 ms      0.5998 ms     0.995x
+Shared                  0.9422 ms      0.9469 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.0840 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.141x
+  Warp   GH-reorder:  0.140x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 178.28 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.58 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0603 ms  |  BW: 786.87 GB/s  |  Speedup vs [1]: 0.994x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4232 ms  |  BW: 112.15 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4258 ms  |  BW: 111.48 GB/s  |  Speedup vs [3]: 0.994x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6713 ms  |  BW: 70.71 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6696 ms  |  BW: 70.89 GB/s  |  Speedup vs [5]: 1.002x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 178.28 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms      0.0603 ms     0.994x
+Warp                    0.4232 ms      0.4258 ms     0.994x
+Shared                  0.6713 ms      0.6696 ms     1.002x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.142x
+  Warp   GH-reorder:  0.141x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.090x
+
+Shared break-even: 108814 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 206.36 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6820 ms  |  BW: 36.52 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7181 ms  |  BW: 35.75 GB/s  |  Speedup vs [1]: 0.979x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3640 ms  |  BW: 168.73 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3489 ms  |  BW: 176.05 GB/s  |  Speedup vs [3]: 1.043x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5836 ms  |  BW: 105.25 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5912 ms  |  BW: 103.89 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 206.36 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6820 ms      1.7181 ms     0.979x
+Warp                    0.3640 ms      0.3489 ms     1.043x
+Shared                  0.5836 ms      0.5912 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 1.6820 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.621x
+  Warp   GH-reorder:  4.821x
+  Shared original:    2.882x
+  Shared GH-reorder:  2.845x
+
+Warp break-even: 13644 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ globalHilbert (B=512)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 25.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1556 ms  |  BW: 210.84 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1569 ms  |  BW: 209.04 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0440 ms  |  BW: 746.15 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0448 ms  |  BW: 732.00 GB/s  |  Speedup vs [3]: 0.981x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0499 ms  |  BW: 657.09 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0517 ms  |  BW: 634.82 GB/s  |  Speedup vs [5]: 0.966x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 25.41 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1556 ms      0.1569 ms     0.991x
+Warp                    0.0440 ms      0.0448 ms     0.981x
+Shared                  0.0499 ms      0.0517 ms     0.966x
+
+Kernel-level comparison（Baseline = Naive original 0.1556 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.539x
+  Warp   GH-reorder:  3.472x
+  Shared original:    3.116x
+  Shared GH-reorder:  3.011x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 18.83 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0805 ms  |  BW: 266.33 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0763 ms  |  BW: 280.76 GB/s  |  Speedup vs [1]: 1.054x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0308 ms  |  BW: 695.05 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0310 ms  |  BW: 690.69 GB/s  |  Speedup vs [3]: 0.994x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0382 ms  |  BW: 560.32 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0380 ms  |  BW: 564.12 GB/s  |  Speedup vs [5]: 1.007x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 18.83 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0805 ms      0.0763 ms     1.054x
+Warp                    0.0308 ms      0.0310 ms     0.994x
+Shared                  0.0382 ms      0.0380 ms     1.007x
+
+Kernel-level comparison（Baseline = Naive original 0.0805 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.610x
+  Warp   GH-reorder:  2.593x
+  Shared original:    2.104x
+  Shared GH-reorder:  2.118x
+
+Naive break-even: 4551 iterations
+Shared break-even: 73089 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 26.09 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4064 ms  |  BW: 45.26 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3787 ms  |  BW: 48.57 GB/s  |  Speedup vs [1]: 1.073x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0427 ms  |  BW: 430.74 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0447 ms  |  BW: 411.59 GB/s  |  Speedup vs [3]: 0.956x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0660 ms  |  BW: 278.65 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0760 ms  |  BW: 241.88 GB/s  |  Speedup vs [5]: 0.868x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 26.09 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4064 ms      0.3787 ms     1.073x
+Warp                    0.0427 ms      0.0447 ms     0.956x
+Shared                  0.0660 ms      0.0760 ms     0.868x
+
+Kernel-level comparison（Baseline = Naive original 0.4064 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.516x
+  Warp   GH-reorder:  9.093x
+  Shared original:    6.156x
+  Shared GH-reorder:  5.344x
+
+Naive break-even: 942 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 200.61 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6869 ms  |  BW: 346.92 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7111 ms  |  BW: 335.10 GB/s  |  Speedup vs [1]: 0.966x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4067 ms  |  BW: 585.88 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3992 ms  |  BW: 596.91 GB/s  |  Speedup vs [3]: 1.019x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6155 ms  |  BW: 387.12 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6091 ms  |  BW: 391.22 GB/s  |  Speedup vs [5]: 1.011x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 200.61 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6869 ms      0.7111 ms     0.966x
+Warp                    0.4067 ms      0.3992 ms     1.019x
+Shared                  0.6155 ms      0.6091 ms     1.011x
+
+Kernel-level comparison（Baseline = Naive original 0.6869 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.689x
+  Warp   GH-reorder:  1.721x
+  Shared original:    1.116x
+  Shared GH-reorder:  1.128x
+
+Warp break-even: 26691 iterations
+Shared break-even: 31097 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 278.96 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0841 ms  |  BW: 807.71 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0844 ms  |  BW: 804.28 GB/s  |  Speedup vs [1]: 0.996x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5969 ms  |  BW: 113.78 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6001 ms  |  BW: 113.19 GB/s  |  Speedup vs [3]: 0.995x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9422 ms  |  BW: 72.08 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9471 ms  |  BW: 71.71 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 278.96 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0841 ms      0.0844 ms     0.996x
+Warp                    0.5969 ms      0.6001 ms     0.995x
+Shared                  0.9422 ms      0.9471 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.0841 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.141x
+  Warp   GH-reorder:  0.140x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 179.94 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.31 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0605 ms  |  BW: 784.21 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4232 ms  |  BW: 112.15 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4261 ms  |  BW: 111.40 GB/s  |  Speedup vs [3]: 0.993x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6714 ms  |  BW: 70.70 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6698 ms  |  BW: 70.86 GB/s  |  Speedup vs [5]: 1.002x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 179.94 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms      0.0605 ms     0.991x
+Warp                    0.4232 ms      0.4261 ms     0.993x
+Shared                  0.6714 ms      0.6698 ms     1.002x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.142x
+  Warp   GH-reorder:  0.141x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.090x
+
+Shared break-even: 114851 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 201.21 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6816 ms  |  BW: 36.52 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7130 ms  |  BW: 35.86 GB/s  |  Speedup vs [1]: 0.982x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3640 ms  |  BW: 168.72 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3489 ms  |  BW: 176.05 GB/s  |  Speedup vs [3]: 1.043x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5836 ms  |  BW: 105.25 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5915 ms  |  BW: 103.84 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 201.21 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6816 ms      1.7130 ms     0.982x
+Warp                    0.3640 ms      0.3489 ms     1.043x
+Shared                  0.5836 ms      0.5915 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 1.6816 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.619x
+  Warp   GH-reorder:  4.820x
+  Shared original:    2.882x
+  Shared GH-reorder:  2.843x
+
+Warp break-even: 13277 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ globalHilbert (B=1024)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 26.13 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1557 ms  |  BW: 210.77 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1571 ms  |  BW: 208.82 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0440 ms  |  BW: 745.80 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0448 ms  |  BW: 732.16 GB/s  |  Speedup vs [3]: 0.982x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0500 ms  |  BW: 656.55 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0517 ms  |  BW: 634.82 GB/s  |  Speedup vs [5]: 0.967x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 26.13 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1557 ms      0.1571 ms     0.991x
+Warp                    0.0440 ms      0.0448 ms     0.982x
+Shared                  0.0500 ms      0.0517 ms     0.967x
+
+Kernel-level comparison（Baseline = Naive original 0.1557 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.538x
+  Warp   GH-reorder:  3.474x
+  Shared original:    3.115x
+  Shared GH-reorder:  3.012x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 18.64 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0804 ms  |  BW: 266.61 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0766 ms  |  BW: 279.79 GB/s  |  Speedup vs [1]: 1.049x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0309 ms  |  BW: 694.37 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0312 ms  |  BW: 687.74 GB/s  |  Speedup vs [3]: 0.990x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0383 ms  |  BW: 559.72 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0381 ms  |  BW: 561.83 GB/s  |  Speedup vs [5]: 1.004x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 18.64 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0804 ms      0.0766 ms     1.049x
+Warp                    0.0309 ms      0.0312 ms     0.990x
+Shared                  0.0383 ms      0.0381 ms     1.004x
+
+Kernel-level comparison（Baseline = Naive original 0.0804 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.604x
+  Warp   GH-reorder:  2.580x
+  Shared original:    2.099x
+  Shared GH-reorder:  2.107x
+
+Naive break-even: 4921 iterations
+Shared break-even: 129995 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 26.14 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4062 ms  |  BW: 45.28 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3816 ms  |  BW: 48.20 GB/s  |  Speedup vs [1]: 1.064x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0427 ms  |  BW: 430.64 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0454 ms  |  BW: 405.18 GB/s  |  Speedup vs [3]: 0.941x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0625 ms  |  BW: 294.46 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0711 ms  |  BW: 258.74 GB/s  |  Speedup vs [5]: 0.879x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 26.14 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4062 ms      0.3816 ms     1.064x
+Warp                    0.0427 ms      0.0454 ms     0.941x
+Shared                  0.0625 ms      0.0711 ms     0.879x
+
+Kernel-level comparison（Baseline = Naive original 0.4062 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.510x
+  Warp   GH-reorder:  8.948x
+  Shared original:    6.503x
+  Shared GH-reorder:  5.714x
+
+Naive break-even: 1063 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 200.85 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6875 ms  |  BW: 346.62 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7127 ms  |  BW: 334.33 GB/s  |  Speedup vs [1]: 0.965x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4044 ms  |  BW: 589.20 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4003 ms  |  BW: 595.23 GB/s  |  Speedup vs [3]: 1.010x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6185 ms  |  BW: 385.29 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6100 ms  |  BW: 390.64 GB/s  |  Speedup vs [5]: 1.014x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 200.85 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6875 ms      0.7127 ms     0.965x
+Warp                    0.4044 ms      0.4003 ms     1.010x
+Shared                  0.6185 ms      0.6100 ms     1.014x
+
+Kernel-level comparison（Baseline = Naive original 0.6875 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.700x
+  Warp   GH-reorder:  1.717x
+  Shared original:    1.112x
+  Shared GH-reorder:  1.127x
+
+Warp break-even: 49035 iterations
+Shared break-even: 23746 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 281.81 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0841 ms  |  BW: 808.01 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0847 ms  |  BW: 802.23 GB/s  |  Speedup vs [1]: 0.993x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5974 ms  |  BW: 113.70 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6005 ms  |  BW: 113.10 GB/s  |  Speedup vs [3]: 0.995x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9429 ms  |  BW: 72.04 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9475 ms  |  BW: 71.68 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 281.81 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0841 ms      0.0847 ms     0.993x
+Warp                    0.5974 ms      0.6005 ms     0.995x
+Shared                  0.9429 ms      0.9475 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.0841 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.141x
+  Warp   GH-reorder:  0.140x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 179.90 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.03 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0605 ms  |  BW: 784.21 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4236 ms  |  BW: 112.07 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4265 ms  |  BW: 111.30 GB/s  |  Speedup vs [3]: 0.993x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6718 ms  |  BW: 70.66 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6703 ms  |  BW: 70.81 GB/s  |  Speedup vs [5]: 1.002x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 179.90 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms      0.0605 ms     0.991x
+Warp                    0.4236 ms      0.4265 ms     0.993x
+Shared                  0.6718 ms      0.6703 ms     1.002x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.142x
+  Warp   GH-reorder:  0.141x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.090x
+
+Shared break-even: 124571 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 200.92 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6844 ms  |  BW: 36.46 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7207 ms  |  BW: 35.69 GB/s  |  Speedup vs [1]: 0.979x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3644 ms  |  BW: 168.57 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3492 ms  |  BW: 175.90 GB/s  |  Speedup vs [3]: 1.043x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5839 ms  |  BW: 105.18 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5915 ms  |  BW: 103.84 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 200.92 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6844 ms      1.7207 ms     0.979x
+Warp                    0.3644 ms      0.3492 ms     1.043x
+Shared                  0.5839 ms      0.5915 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 1.6844 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.623x
+  Warp   GH-reorder:  4.824x
+  Shared original:    2.885x
+  Shared GH-reorder:  2.848x
+
+Warp break-even: 13232 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ globalHilbert (B=2048)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 26.45 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1556 ms  |  BW: 210.91 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1568 ms  |  BW: 209.24 GB/s  |  Speedup vs [1]: 0.992x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0440 ms  |  BW: 746.34 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0448 ms  |  BW: 732.85 GB/s  |  Speedup vs [3]: 0.982x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0500 ms  |  BW: 656.82 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0517 ms  |  BW: 634.82 GB/s  |  Speedup vs [5]: 0.967x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 26.45 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1556 ms      0.1568 ms     0.992x
+Warp                    0.0440 ms      0.0448 ms     0.982x
+Shared                  0.0500 ms      0.0517 ms     0.967x
+
+Kernel-level comparison（Baseline = Naive original 0.1556 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.539x
+  Warp   GH-reorder:  3.475x
+  Shared original:    3.114x
+  Shared GH-reorder:  3.010x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 18.83 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0805 ms  |  BW: 266.22 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0775 ms  |  BW: 276.50 GB/s  |  Speedup vs [1]: 1.039x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0308 ms  |  BW: 694.82 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0313 ms  |  BW: 685.27 GB/s  |  Speedup vs [3]: 0.986x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0383 ms  |  BW: 559.87 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0383 ms  |  BW: 560.02 GB/s  |  Speedup vs [5]: 1.000x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 18.83 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0805 ms      0.0775 ms     1.039x
+Warp                    0.0308 ms      0.0313 ms     0.986x
+Shared                  0.0383 ms      0.0383 ms     1.000x
+
+Kernel-level comparison（Baseline = Naive original 0.0805 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.610x
+  Warp   GH-reorder:  2.574x
+  Shared original:    2.103x
+  Shared GH-reorder:  2.104x
+
+Naive break-even: 6298 iterations
+Shared break-even: 1839875 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 26.00 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4063 ms  |  BW: 45.27 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4480 ms  |  BW: 41.06 GB/s  |  Speedup vs [1]: 0.907x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0427 ms  |  BW: 430.74 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0461 ms  |  BW: 398.63 GB/s  |  Speedup vs [3]: 0.925x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0660 ms  |  BW: 278.69 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0776 ms  |  BW: 236.90 GB/s  |  Speedup vs [5]: 0.850x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 26.00 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4063 ms      0.4480 ms     0.907x
+Warp                    0.0427 ms      0.0461 ms     0.925x
+Shared                  0.0660 ms      0.0776 ms     0.850x
+
+Kernel-level comparison（Baseline = Naive original 0.4063 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.516x
+  Warp   GH-reorder:  8.806x
+  Shared original:    6.157x
+  Shared GH-reorder:  5.233x
+
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 197.93 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6882 ms  |  BW: 346.26 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7077 ms  |  BW: 336.73 GB/s  |  Speedup vs [1]: 0.972x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4069 ms  |  BW: 585.61 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4014 ms  |  BW: 593.64 GB/s  |  Speedup vs [3]: 1.014x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6269 ms  |  BW: 380.11 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6104 ms  |  BW: 390.39 GB/s  |  Speedup vs [5]: 1.027x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 197.93 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6882 ms      0.7077 ms     0.972x
+Warp                    0.4069 ms      0.4014 ms     1.014x
+Shared                  0.6269 ms      0.6104 ms     1.027x
+
+Kernel-level comparison（Baseline = Naive original 0.6882 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.691x
+  Warp   GH-reorder:  1.714x
+  Shared original:    1.098x
+  Shared GH-reorder:  1.127x
+
+Warp break-even: 35991 iterations
+Shared break-even: 11991 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 274.07 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0841 ms  |  BW: 807.71 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0849 ms  |  BW: 800.30 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5974 ms  |  BW: 113.70 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6000 ms  |  BW: 113.20 GB/s  |  Speedup vs [3]: 0.996x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9430 ms  |  BW: 72.03 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9477 ms  |  BW: 71.67 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 274.07 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0841 ms      0.0849 ms     0.991x
+Warp                    0.5974 ms      0.6000 ms     0.996x
+Shared                  0.9430 ms      0.9477 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.0841 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.141x
+  Warp   GH-reorder:  0.140x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 175.53 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.31 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0608 ms  |  BW: 780.80 GB/s  |  Speedup vs [1]: 0.987x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4236 ms  |  BW: 112.07 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4258 ms  |  BW: 111.48 GB/s  |  Speedup vs [3]: 0.995x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6718 ms  |  BW: 70.66 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6707 ms  |  BW: 70.78 GB/s  |  Speedup vs [5]: 1.002x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 175.53 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms      0.0608 ms     0.987x
+Warp                    0.4236 ms      0.4258 ms     0.995x
+Shared                  0.6718 ms      0.6707 ms     1.002x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.142x
+  Warp   GH-reorder:  0.141x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+Shared break-even: 158728 iterations
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 199.74 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6843 ms  |  BW: 36.47 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.4151 ms  |  BW: 43.40 GB/s  |  Speedup vs [1]: 1.190x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3643 ms  |  BW: 168.58 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3493 ms  |  BW: 175.83 GB/s  |  Speedup vs [3]: 1.043x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5840 ms  |  BW: 105.18 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5916 ms  |  BW: 103.81 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 199.74 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6843 ms      1.4151 ms     1.190x
+Warp                    0.3643 ms      0.3493 ms     1.043x
+Shared                  0.5840 ms      0.5916 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 1.6843 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.623x
+  Warp   GH-reorder:  4.822x
+  Shared original:    2.884x
+  Shared GH-reorder:  2.847x
+
+Naive break-even: 742 iterations
+Warp break-even: 13304 iterations
+════════════════════════════════════════════════════════
+
+------------------------------------------
+ globalHilbert (B=4096)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 25.77 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1555 ms  |  BW: 210.93 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1569 ms  |  BW: 209.08 GB/s  |  Speedup vs [1]: 0.991x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0440 ms  |  BW: 746.15 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0448 ms  |  BW: 732.50 GB/s  |  Speedup vs [3]: 0.982x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0500 ms  |  BW: 656.82 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.0516 ms  |  BW: 635.58 GB/s  |  Speedup vs [5]: 0.968x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 25.77 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1555 ms      0.1569 ms     0.991x
+Warp                    0.0440 ms      0.0448 ms     0.982x
+Shared                  0.0500 ms      0.0516 ms     0.968x
+
+Kernel-level comparison（Baseline = Naive original 0.1555 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.537x
+  Warp   GH-reorder:  3.473x
+  Shared original:    3.114x
+  Shared GH-reorder:  3.013x
+
+════════════════════════════════════════════════════════
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 18.79 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0809 ms  |  BW: 264.74 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.0771 ms  |  BW: 277.85 GB/s  |  Speedup vs [1]: 1.050x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0320 ms  |  BW: 669.05 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0325 ms  |  BW: 659.16 GB/s  |  Speedup vs [3]: 0.985x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0410 ms  |  BW: 522.94 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.0412 ms  |  BW: 520.60 GB/s  |  Speedup vs [5]: 0.996x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 18.79 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0809 ms      0.0771 ms     1.050x
+Warp                    0.0320 ms      0.0325 ms     0.985x
+Shared                  0.0410 ms      0.0412 ms     0.996x
+
+Kernel-level comparison（Baseline = Naive original 0.0809 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.527x
+  Warp   GH-reorder:  2.490x
+  Shared original:    1.975x
+  Shared GH-reorder:  1.966x
+
+Naive break-even: 4919 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 26.16 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4063 ms  |  BW: 45.27 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3818 ms  |  BW: 48.17 GB/s  |  Speedup vs [1]: 1.064x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0427 ms  |  BW: 430.74 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0463 ms  |  BW: 397.38 GB/s  |  Speedup vs [3]: 0.923x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0661 ms  |  BW: 278.43 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.0779 ms  |  BW: 236.22 GB/s  |  Speedup vs [5]: 0.848x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 26.16 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4063 ms      0.3818 ms     1.064x
+Warp                    0.0427 ms      0.0463 ms     0.923x
+Shared                  0.0661 ms      0.0779 ms     0.848x
+
+Kernel-level comparison（Baseline = Naive original 0.4063 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    9.515x
+  Warp   GH-reorder:  8.778x
+  Shared original:    6.151x
+  Shared GH-reorder:  5.218x
+
+Naive break-even: 1069 iterations
+════════════════════════════════════════════════════════
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 197.93 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6861 ms  |  BW: 347.33 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.7060 ms  |  BW: 337.52 GB/s  |  Speedup vs [1]: 0.972x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4206 ms  |  BW: 566.61 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4052 ms  |  BW: 588.13 GB/s  |  Speedup vs [3]: 1.038x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6212 ms  |  BW: 383.60 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.6100 ms  |  BW: 390.63 GB/s  |  Speedup vs [5]: 1.018x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 197.93 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6861 ms      0.7060 ms     0.972x
+Warp                    0.4206 ms      0.4052 ms     1.038x
+Shared                  0.6212 ms      0.6100 ms     1.018x
+
+Kernel-level comparison（Baseline = Naive original 0.6861 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.631x
+  Warp   GH-reorder:  1.693x
+  Shared original:    1.104x
+  Shared GH-reorder:  1.125x
+
+Warp break-even: 12859 iterations
+Shared break-even: 17700 iterations
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 287.22 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0841 ms  |  BW: 808.01 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0856 ms  |  BW: 793.13 GB/s  |  Speedup vs [1]: 0.982x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5974 ms  |  BW: 113.70 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5986 ms  |  BW: 113.47 GB/s  |  Speedup vs [3]: 0.998x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9429 ms  |  BW: 72.03 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9496 ms  |  BW: 71.53 GB/s  |  Speedup vs [5]: 0.993x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 287.22 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0841 ms      0.0856 ms     0.982x
+Warp                    0.5974 ms      0.5986 ms     0.998x
+Shared                  0.9429 ms      0.9496 ms     0.993x
+
+Kernel-level comparison（Baseline = Naive original 0.0841 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.141x
+  Warp   GH-reorder:  0.140x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 175.80 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0600 ms  |  BW: 791.31 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.0613 ms  |  BW: 774.77 GB/s  |  Speedup vs [1]: 0.979x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4236 ms  |  BW: 112.07 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4242 ms  |  BW: 111.90 GB/s  |  Speedup vs [3]: 0.999x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6718 ms  |  BW: 70.66 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6732 ms  |  BW: 70.51 GB/s  |  Speedup vs [5]: 0.998x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 175.80 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.0600 ms      0.0613 ms     0.979x
+Warp                    0.4236 ms      0.4242 ms     0.999x
+Shared                  0.6718 ms      0.6732 ms     0.998x
+
+Kernel-level comparison（Baseline = Naive original 0.0600 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.142x
+  Warp   GH-reorder:  0.141x
+  Shared original:    0.089x
+  Shared GH-reorder:  0.089x
+
+════════════════════════════════════════════════════════
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 197.87 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6842 ms  |  BW: 36.47 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7092 ms  |  BW: 35.93 GB/s  |  Speedup vs [1]: 0.985x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3643 ms  |  BW: 168.58 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3495 ms  |  BW: 175.72 GB/s  |  Speedup vs [3]: 1.042x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5839 ms  |  BW: 105.19 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5919 ms  |  BW: 103.77 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 197.87 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6842 ms      1.7092 ms     0.985x
+Warp                    0.3643 ms      0.3495 ms     1.042x
+Shared                  0.5839 ms      0.5919 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 1.6842 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.623x
+  Warp   GH-reorder:  4.818x
+  Shared original:    2.884x
+  Shared GH-reorder:  2.845x
+
+Warp break-even: 13372 iterations
+════════════════════════════════════════════════════════
+

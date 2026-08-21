@@ -32,9 +32,9 @@ All kernels are benchmarked against NVIDIA cuSPARSE across seven sparse matrices
 
 
 ## 3. Build
-make  #Default: sm_86 (RTX 3090, puffin)
-make CUDA_ARCH_FLAGS="-gencode arch=compute_70,code=sm_70"  #V100 (synge-n01/n02)
-make CUDA_ARCH_FLAGS="-gencode arch=compute_90,code=sm_90"  # H100 NVL (callan-n24)
+make  #Default: sm_86 (NVIDIA RTX 3090)
+make CUDA_ARCH_FLAGS="-gencode arch=compute_70,code=sm_70"  #Tesla V100
+make CUDA_ARCH_FLAGS="-gencode arch=compute_90,code=sm_90"  #NVIDIA H200
 make clean
 
 ## 4. Usage
@@ -55,7 +55,7 @@ bash script/runCustomKernels.sh
 # Run Hilbert reordering benchmarks  
 bash script/runHilbertReordering.sh
 
-All the experimental results are saved to the `results/` directory, including those for RTX3090 and V100.
+All the experimental results are saved to the `results/` directory, including those for NVIDIA RTX3090, NVIDIA H200, and Telsa V100.
 
 
 ## 5. Matrix

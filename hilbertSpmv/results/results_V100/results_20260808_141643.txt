@@ -1,0 +1,628 @@
+Sat Aug  8 14:16:45 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-PCIE-16GB           Off |   00000000:5E:00.0 Off |                    0 |
+| N/A   26C    P0             35W /  250W |       1MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  Tesla V100-PCIE-16GB           Off |   00000000:D8:00.0 Off |                    0 |
+| N/A   26C    P0             35W /  250W |       1MiB /  16384MiB |      1%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Start time: Sat Aug  8 14:16:45 IST 2026
+
+==========================================
+ Phase 1: Benchmark Runs
+==========================================
+------------------------------------------
+ Kernel: baseline (cuSPARSE)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+cuSPARSE baseline:
+  Average time: 0.0514 ms
+  Bandwidth:    638.62 GB/s
+  GFLOPS:       156.01
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+cuSPARSE baseline:
+  Average time: 0.0381 ms
+  Bandwidth:    563.19 GB/s
+  GFLOPS:       136.67
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+cuSPARSE baseline:
+  Average time: 0.0357 ms
+  Bandwidth:    515.11 GB/s
+  GFLOPS:       119.28
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+cuSPARSE baseline:
+  Average time: 0.3331 ms
+  Bandwidth:    715.47 GB/s
+  GFLOPS:       169.30
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+cuSPARSE baseline:
+  Average time: 0.1229 ms
+  Bandwidth:    552.79 GB/s
+  GFLOPS:       90.07
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+cuSPARSE baseline:
+  Average time: 0.0909 ms
+  Bandwidth:    522.19 GB/s
+  GFLOPS:       84.56
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+cuSPARSE baseline:
+  Average time: 0.1303 ms
+  Bandwidth:    471.29 GB/s
+  GFLOPS:       91.70
+
+------------------------------------------
+ Kernel: naiveCsr
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 2.02e-06
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.1869 ms
+  Bandwidth: 175.51 GB/s
+  GFLOPS:    42.88
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 3.52e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.0927 ms
+  Bandwidth: 231.07 GB/s
+  GFLOPS:    56.07
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 6.47e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.5539 ms
+  Bandwidth: 33.20 GB/s
+  GFLOPS:    7.69
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.20e-07
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      1.2708 ms
+  Bandwidth: 187.52 GB/s
+  GFLOPS:    44.37
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.1012 ms
+  Bandwidth: 671.14 GB/s
+  GFLOPS:    109.35
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.0740 ms
+  Bandwidth: 641.14 GB/s
+  GFLOPS:    103.82
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      2.1217 ms
+  Bandwidth: 28.95 GB/s
+  GFLOPS:    5.63
+
+------------------------------------------
+ Kernel: warpCsr
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.0518 ms
+  Bandwidth: 632.94 GB/s
+  GFLOPS:    154.62
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.0376 ms
+  Bandwidth: 569.48 GB/s
+  GFLOPS:    138.20
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.0504 ms
+  Bandwidth: 364.63 GB/s
+  GFLOPS:    84.43
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.4575 ms
+  Bandwidth: 520.83 GB/s
+  GFLOPS:    123.24
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.6703 ms
+  Bandwidth: 101.33 GB/s
+  GFLOPS:    16.51
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.4766 ms
+  Bandwidth: 99.60 GB/s
+  GFLOPS:    16.13
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.4218 ms
+  Bandwidth: 145.61 GB/s
+  GFLOPS:    28.33
+
+------------------------------------------
+ Kernel: sharedCsr (sharedVecSize=256)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.0604 ms
+  Bandwidth: 542.86 GB/s
+  GFLOPS:    132.61
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.0458 ms
+  Bandwidth: 468.19 GB/s
+  GFLOPS:    113.62
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.0749 ms
+  Bandwidth: 245.61 GB/s
+  GFLOPS:    56.87
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.6072 ms
+  Bandwidth: 392.44 GB/s
+  GFLOPS:    92.86
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.9652 ms
+  Bandwidth: 70.37 GB/s
+  GFLOPS:    11.47
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.6902 ms
+  Bandwidth: 68.77 GB/s
+  GFLOPS:    11.14
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.5836 ms
+  Bandwidth: 105.24 GB/s
+  GFLOPS:    20.48
+
+------------------------------------------
+ Kernel: sharedCsr (sharedVecSize=512)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.0674 ms
+  Bandwidth: 487.00 GB/s
+  GFLOPS:    118.97
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.0515 ms
+  Bandwidth: 415.90 GB/s
+  GFLOPS:    100.93
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.0792 ms
+  Bandwidth: 232.10 GB/s
+  GFLOPS:    53.74
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.7228 ms
+  Bandwidth: 329.68 GB/s
+  GFLOPS:    78.01
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      1.1521 ms
+  Bandwidth: 58.95 GB/s
+  GFLOPS:    9.61
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.8244 ms
+  Bandwidth: 57.58 GB/s
+  GFLOPS:    9.32
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.6859 ms
+  Bandwidth: 89.54 GB/s
+  GFLOPS:    17.42
+
+------------------------------------------
+ Kernel: sharedCsr (sharedVecSize=1024)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.0787 ms
+  Bandwidth: 416.69 GB/s
+  GFLOPS:    101.79
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.0601 ms
+  Bandwidth: 356.77 GB/s
+  GFLOPS:    86.58
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.0925 ms
+  Bandwidth: 198.87 GB/s
+  GFLOPS:    46.05
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.9021 ms
+  Bandwidth: 264.15 GB/s
+  GFLOPS:    62.50
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      1.4567 ms
+  Bandwidth: 46.63 GB/s
+  GFLOPS:    7.60
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      1.0518 ms
+  Bandwidth: 45.13 GB/s
+  GFLOPS:    7.31
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.8699 ms
+  Bandwidth: 70.61 GB/s
+  GFLOPS:    13.74
+
+------------------------------------------
+ Kernel: sharedCsr (sharedVecSize=2048)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.0999 ms
+  Bandwidth: 328.58 GB/s
+  GFLOPS:    80.27
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.0754 ms
+  Bandwidth: 284.39 GB/s
+  GFLOPS:    69.01
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.1199 ms
+  Bandwidth: 153.35 GB/s
+  GFLOPS:    35.51
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      1.1323 ms
+  Bandwidth: 210.45 GB/s
+  GFLOPS:    49.80
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      1.8517 ms
+  Bandwidth: 36.68 GB/s
+  GFLOPS:    5.98
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      1.3463 ms
+  Bandwidth: 35.26 GB/s
+  GFLOPS:    5.71
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      1.1293 ms
+  Bandwidth: 54.39 GB/s
+  GFLOPS:    10.58
+
+------------------------------------------
+ Kernel: sharedCsr (sharedVecSize=4096)
+------------------------------------------
+--- data/sciComputingMatrix/cant/cant.mtx ---
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.1318 ms
+  Bandwidth: 248.91 GB/s
+  GFLOPS:    60.81
+
+--- data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.1072 ms
+  Bandwidth: 199.92 GB/s
+  GFLOPS:    48.52
+
+--- data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.1879 ms
+  Bandwidth: 97.91 GB/s
+  GFLOPS:    22.67
+
+--- data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      1.6998 ms
+  Bandwidth: 140.19 GB/s
+  GFLOPS:    33.17
+
+--- data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      2.8775 ms
+  Bandwidth: 23.60 GB/s
+  GFLOPS:    3.85
+
+--- data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      2.0835 ms
+  Bandwidth: 22.78 GB/s
+  GFLOPS:    3.69
+
+--- data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      1.7264 ms
+  Bandwidth: 35.58 GB/s
+  GFLOPS:    6.92
+

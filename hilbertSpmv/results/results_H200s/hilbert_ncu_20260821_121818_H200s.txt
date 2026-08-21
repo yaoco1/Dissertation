@@ -1,0 +1,4069 @@
+Start time: Fri Aug 21 12:20:05 PM BST 2026
+
+==========================================
+ Phase 2: ncu Memory Workload Analysis
+==========================================
+------------------------------------------
+ ncu: rowReorder
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1525032 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+
+Preprocessing (row reorder): 9.28 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1388 ms  |  BW: 236.42 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2258 ms  |  BW: 145.28 GB/s  |  Speedup vs [1]: 0.615x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1377 ms  |  BW: 238.19 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2198 ms  |  BW: 149.25 GB/s  |  Speedup vs [3]: 0.627x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1380 ms  |  BW: 237.77 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2150 ms  |  BW: 152.63 GB/s  |  Speedup vs [5]: 0.642x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 9.28 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1388 ms    0.2258 ms     0.615x
+Warp                    0.1377 ms    0.2198 ms     0.627x
+Shared                  0.1380 ms    0.2150 ms     0.642x
+
+Kernel-level comparison（Baseline = Naive original 0.1388 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   1.007x
+  Warp   reordered:  0.631x
+  Shared original:   1.006x
+  Shared reordered:  0.646x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525032
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1525077 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+
+Preprocessing (row reorder): 7.67 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1380 ms  |  BW: 155.30 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1371 ms  |  BW: 156.36 GB/s  |  Speedup vs [1]: 1.007x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1367 ms  |  BW: 156.81 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1368 ms  |  BW: 156.71 GB/s  |  Speedup vs [3]: 0.999x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.2540 ms  |  BW: 84.37 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1365 ms  |  BW: 156.99 GB/s  |  Speedup vs [5]: 1.861x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 7.67 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1380 ms    0.1371 ms     1.007x
+Warp                    0.1367 ms    0.1368 ms     0.999x
+Shared                  0.2540 ms    0.1365 ms     1.861x
+
+Kernel-level comparison（Baseline = Naive original 0.1380 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   1.010x
+  Warp   reordered:  1.009x
+  Shared original:   0.543x
+  Shared reordered:  1.011x
+
+Naive break-even: 8211 iterations
+Shared break-even: 65 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525077
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1525122 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+
+Preprocessing (row reorder): 12.87 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3334 ms  |  BW: 55.17 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3864 ms  |  BW: 47.60 GB/s  |  Speedup vs [1]: 0.863x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2540 ms  |  BW: 72.41 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1367 ms  |  BW: 134.51 GB/s  |  Speedup vs [3]: 1.858x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2242 ms  |  BW: 82.03 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1370 ms  |  BW: 134.21 GB/s  |  Speedup vs [5]: 1.636x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 12.87 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.3334 ms    0.3864 ms     0.863x
+Warp                    0.2540 ms    0.1367 ms     1.858x
+Shared                  0.2242 ms    0.1370 ms     1.636x
+
+Kernel-level comparison（Baseline = Naive original 0.3334 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   1.312x
+  Warp   reordered:  2.438x
+  Shared original:   1.487x
+  Shared reordered:  2.432x
+
+Warp break-even: 110 iterations
+Shared break-even: 148 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525122
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1525167 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+
+Preprocessing (row reorder): 97.93 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2650 ms  |  BW: 899.11 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2407 ms  |  BW: 989.81 GB/s  |  Speedup vs [1]: 1.101x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1921 ms  |  BW: 1240.46 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1910 ms  |  BW: 1247.88 GB/s  |  Speedup vs [3]: 1.006x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2786 ms  |  BW: 855.26 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2547 ms  |  BW: 935.60 GB/s  |  Speedup vs [5]: 1.094x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 97.93 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2650 ms    0.2407 ms     1.101x
+Warp                    0.1921 ms    0.1910 ms     1.006x
+Shared                  0.2786 ms    0.2547 ms     1.094x
+
+Kernel-level comparison（Baseline = Naive original 0.2650 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   1.380x
+  Warp   reordered:  1.388x
+  Shared original:   0.951x
+  Shared reordered:  1.041x
+
+Naive break-even: 4033 iterations
+Warp break-even: 85772 iterations
+Shared break-even: 4093 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525167
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1525215 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+
+Preprocessing (row reorder): 157.14 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2435 ms  |  BW: 278.95 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2400 ms  |  BW: 282.96 GB/s  |  Speedup vs [1]: 1.014x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3398 ms  |  BW: 199.89 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4550 ms  |  BW: 149.27 GB/s  |  Speedup vs [3]: 0.747x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5627 ms  |  BW: 120.70 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4690 ms  |  BW: 144.83 GB/s  |  Speedup vs [5]: 1.200x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 157.14 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2435 ms    0.2400 ms     1.014x
+Warp                    0.3398 ms    0.4550 ms     0.747x
+Shared                  0.5627 ms    0.4690 ms     1.200x
+
+Kernel-level comparison（Baseline = Naive original 0.2435 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   0.717x
+  Warp   reordered:  0.535x
+  Shared original:   0.433x
+  Shared reordered:  0.519x
+
+Naive break-even: 45526 iterations
+Shared break-even: 1677 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525215
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1525260 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+
+Preprocessing (row reorder): 109.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1542 ms  |  BW: 307.92 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2234 ms  |  BW: 212.47 GB/s  |  Speedup vs [1]: 0.690x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2311 ms  |  BW: 205.36 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2888 ms  |  BW: 164.36 GB/s  |  Speedup vs [3]: 0.800x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3283 ms  |  BW: 144.59 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3275 ms  |  BW: 144.95 GB/s  |  Speedup vs [5]: 1.003x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 109.41 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1542 ms    0.2234 ms     0.690x
+Warp                    0.2311 ms    0.2888 ms     0.800x
+Shared                  0.3283 ms    0.3275 ms     1.003x
+
+Kernel-level comparison（Baseline = Naive original 0.1542 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   0.667x
+  Warp   reordered:  0.534x
+  Shared original:   0.470x
+  Shared reordered:  0.471x
+
+Shared break-even: 132932 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525260
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1525305 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/rowReorder)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+
+Preprocessing (row reorder): 126.06 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5089 ms  |  BW: 40.71 GB/s
+
+[2] Naive CSR      |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5934 ms  |  BW: 38.55 GB/s  |  Speedup vs [1]: 0.947x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2711 ms  |  BW: 226.52 GB/s
+
+[4] Warp CSR       |  row-reordered
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2994 ms  |  BW: 205.15 GB/s  |  Speedup vs [3]: 0.906x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2620 ms  |  BW: 234.39 GB/s
+
+[6] Shared CSR     |  row-reordered  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3786 ms  |  BW: 162.24 GB/s  |  Speedup vs [5]: 0.692x
+
+════════════════════════════════════════════════════════
+Preprocessing (row reorder): 126.06 ms
+
+Kernel                  Original   Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5089 ms    1.5934 ms     0.947x
+Warp                    0.2711 ms    0.2994 ms     0.906x
+Shared                  0.2620 ms    0.3786 ms     0.692x
+
+Kernel-level comparison（Baseline = Naive original 1.5089 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:   5.565x
+  Warp   reordered:  5.040x
+  Shared original:   5.758x
+  Shared reordered:  3.986x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525305
+
+------------------------------------------
+ ncu: blockedHilbert (B=256)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1525348 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 256  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=256): 11.51 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1537 ms  |  BW: 213.50 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1460 ms  |  BW: 224.65 GB/s  |  Speedup vs [1]: 1.052x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1437 ms  |  BW: 228.26 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1429 ms  |  BW: 229.62 GB/s  |  Speedup vs [3]: 1.006x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1442 ms  |  BW: 227.50 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1433 ms  |  BW: 229.03 GB/s  |  Speedup vs [5]: 1.007x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 11.51 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1537 ms      0.1460 ms     1.052x
+Warp                    0.1437 ms      0.1429 ms     1.006x
+Shared                  0.1442 ms      0.1433 ms     1.007x
+
+Kernel-level comparison（Baseline = Naive original 0.1537 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.069x
+  Warp   BH-reorder:  1.075x
+  Shared original:    1.066x
+  Shared BH-reorder:  1.073x
+
+Naive break-even: 1509 iterations
+Warp break-even: 13523 iterations
+Shared break-even: 11950 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525348
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1525395 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 256  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=256): 9.09 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1545 ms  |  BW: 138.68 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1445 ms  |  BW: 148.35 GB/s  |  Speedup vs [1]: 1.070x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1429 ms  |  BW: 149.95 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1414 ms  |  BW: 151.59 GB/s  |  Speedup vs [3]: 1.011x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1419 ms  |  BW: 151.00 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1412 ms  |  BW: 151.73 GB/s  |  Speedup vs [5]: 1.005x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 9.09 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1545 ms      0.1445 ms     1.070x
+Warp                    0.1429 ms      0.1414 ms     1.011x
+Shared                  0.1419 ms      0.1412 ms     1.005x
+
+Kernel-level comparison（Baseline = Naive original 0.1545 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.081x
+  Warp   BH-reorder:  1.093x
+  Shared original:    1.089x
+  Shared BH-reorder:  1.094x
+
+Naive break-even: 902 iterations
+Warp break-even: 5893 iterations
+Shared break-even: 13149 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525395
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1525439 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 256  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=256): 17.04 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 1.1955 ms  |  BW: 15.39 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3004 ms  |  BW: 61.23 GB/s  |  Speedup vs [1]: 3.980x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1656 ms  |  BW: 111.08 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1615 ms  |  BW: 113.91 GB/s  |  Speedup vs [3]: 1.025x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1627 ms  |  BW: 113.05 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.7489 ms  |  BW: 24.56 GB/s  |  Speedup vs [5]: 0.217x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 17.04 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.1955 ms      0.3004 ms     3.980x
+Warp                    0.1656 ms      0.1615 ms     1.025x
+Shared                  0.1627 ms      0.7489 ms     0.217x
+
+Kernel-level comparison（Baseline = Naive original 1.1955 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.220x
+  Warp   BH-reorder:  7.404x
+  Shared original:    7.348x
+  Shared BH-reorder:  1.596x
+
+Naive break-even: 19 iterations
+Warp break-even: 4140 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525439
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1525484 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 133.03 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.6962 ms  |  BW: 342.29 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 1.2488 ms  |  BW: 190.82 GB/s  |  Speedup vs [1]: 0.557x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2116 ms  |  BW: 1125.88 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2071 ms  |  BW: 1150.42 GB/s  |  Speedup vs [3]: 1.022x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2962 ms  |  BW: 804.55 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.1384 ms  |  BW: 209.32 GB/s  |  Speedup vs [5]: 0.260x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 133.03 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.6962 ms      1.2488 ms     0.557x
+Warp                    0.2116 ms      0.2071 ms     1.022x
+Shared                  0.2962 ms      1.1384 ms     0.260x
+
+Kernel-level comparison（Baseline = Naive original 0.6962 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.289x
+  Warp   BH-reorder:  3.361x
+  Shared original:    2.351x
+  Shared BH-reorder:  0.612x
+
+Warp break-even: 29462 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525484
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1525532 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 256.15 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0208 ms  |  BW: 66.54 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1142 ms  |  BW: 60.96 GB/s  |  Speedup vs [1]: 0.916x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3471 ms  |  BW: 195.66 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.8086 ms  |  BW: 84.00 GB/s  |  Speedup vs [3]: 0.429x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2176 ms  |  BW: 55.78 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.4996 ms  |  BW: 45.29 GB/s  |  Speedup vs [5]: 0.812x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 256.15 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.0208 ms      1.1142 ms     0.916x
+Warp                    0.3471 ms      0.8086 ms     0.429x
+Shared                  1.2176 ms      1.4996 ms     0.812x
+
+Kernel-level comparison（Baseline = Naive original 1.0208 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.941x
+  Warp   BH-reorder:  1.262x
+  Shared original:    0.838x
+  Shared BH-reorder:  0.681x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525532
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1525574 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 157.87 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2129 ms  |  BW: 39.14 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1676 ms  |  BW: 283.14 GB/s  |  Speedup vs [1]: 7.235x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2493 ms  |  BW: 190.44 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2463 ms  |  BW: 192.70 GB/s  |  Speedup vs [3]: 1.012x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3474 ms  |  BW: 136.62 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2607 ms  |  BW: 37.65 GB/s  |  Speedup vs [5]: 0.276x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 157.87 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.2129 ms      0.1676 ms     7.235x
+Warp                    0.2493 ms      0.2463 ms     1.012x
+Shared                  0.3474 ms      1.2607 ms     0.276x
+
+Kernel-level comparison（Baseline = Naive original 1.2129 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    4.866x
+  Warp   BH-reorder:  4.924x
+  Shared original:    3.491x
+  Shared BH-reorder:  0.962x
+
+Naive break-even: 151 iterations
+Warp break-even: 53857 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525574
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1525617 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 256  (Hilbert grid: 8192 x 8192)
+
+Preprocessing (blocked Hilbert, B=256): 171.74 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5398 ms  |  BW: 39.89 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8209 ms  |  BW: 33.73 GB/s  |  Speedup vs [1]: 0.846x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2091 ms  |  BW: 293.75 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2305 ms  |  BW: 266.52 GB/s  |  Speedup vs [3]: 0.907x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2086 ms  |  BW: 50.82 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3325 ms  |  BW: 184.71 GB/s  |  Speedup vs [5]: 3.635x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=256): 171.74 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5398 ms      1.8209 ms     0.846x
+Warp                    0.2091 ms      0.2305 ms     0.907x
+Shared                  1.2086 ms      0.3325 ms     3.635x
+
+Kernel-level comparison（Baseline = Naive original 1.5398 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.364x
+  Warp   BH-reorder:  6.681x
+  Shared original:    1.274x
+  Shared BH-reorder:  4.631x
+
+Shared break-even: 196 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525617
+
+------------------------------------------
+ ncu: blockedHilbert (B=512)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1525662 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 512  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=512): 11.74 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1535 ms  |  BW: 213.74 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1477 ms  |  BW: 222.06 GB/s  |  Speedup vs [1]: 1.039x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1430 ms  |  BW: 229.49 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1421 ms  |  BW: 230.95 GB/s  |  Speedup vs [3]: 1.006x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1445 ms  |  BW: 227.10 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1427 ms  |  BW: 229.94 GB/s  |  Speedup vs [5]: 1.013x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 11.74 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1535 ms      0.1477 ms     1.039x
+Warp                    0.1430 ms      0.1421 ms     1.006x
+Shared                  0.1445 ms      0.1427 ms     1.013x
+
+Kernel-level comparison（Baseline = Naive original 0.1535 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.074x
+  Warp   BH-reorder:  1.080x
+  Shared original:    1.062x
+  Shared BH-reorder:  1.076x
+
+Naive break-even: 2041 iterations
+Warp break-even: 13006 iterations
+Shared break-even: 6573 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525662
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1525707 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 512  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=512): 8.80 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1520 ms  |  BW: 140.98 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1446 ms  |  BW: 148.22 GB/s  |  Speedup vs [1]: 1.051x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1417 ms  |  BW: 151.28 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1412 ms  |  BW: 151.73 GB/s  |  Speedup vs [3]: 1.003x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1448 ms  |  BW: 148.04 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1585 ms  |  BW: 135.25 GB/s  |  Speedup vs [5]: 0.914x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 8.80 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1520 ms      0.1446 ms     1.051x
+Warp                    0.1417 ms      0.1412 ms     1.003x
+Shared                  0.1448 ms      0.1585 ms     0.914x
+
+Kernel-level comparison（Baseline = Naive original 0.1520 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.073x
+  Warp   BH-reorder:  1.076x
+  Shared original:    1.050x
+  Shared BH-reorder:  0.959x
+
+Naive break-even: 1185 iterations
+Warp break-even: 20684 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525707
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1525751 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 512  (Hilbert grid: 256 x 256)
+
+Preprocessing (blocked Hilbert, B=512): 16.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 1.2846 ms  |  BW: 14.32 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3011 ms  |  BW: 61.09 GB/s  |  Speedup vs [1]: 4.267x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1657 ms  |  BW: 111.01 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1616 ms  |  BW: 113.84 GB/s  |  Speedup vs [3]: 1.026x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1644 ms  |  BW: 111.88 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2801 ms  |  BW: 65.66 GB/s  |  Speedup vs [5]: 0.587x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 16.82 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.2846 ms      0.3011 ms     4.267x
+Warp                    0.1657 ms      0.1616 ms     1.026x
+Shared                  0.1644 ms      0.2801 ms     0.587x
+
+Kernel-level comparison（Baseline = Naive original 1.2846 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.753x
+  Warp   BH-reorder:  7.951x
+  Shared original:    7.814x
+  Shared BH-reorder:  4.585x
+
+Naive break-even: 17 iterations
+Warp break-even: 4077 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525751
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1525795 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 132.09 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1831 ms  |  BW: 1301.46 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.9421 ms  |  BW: 252.94 GB/s  |  Speedup vs [1]: 0.194x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2118 ms  |  BW: 1124.81 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.1104 ms  |  BW: 214.60 GB/s  |  Speedup vs [3]: 0.191x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2974 ms  |  BW: 801.16 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2788 ms  |  BW: 854.69 GB/s  |  Speedup vs [5]: 1.067x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 132.09 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1831 ms      0.9421 ms     0.194x
+Warp                    0.2118 ms      1.1104 ms     0.191x
+Shared                  0.2974 ms      0.2788 ms     1.067x
+
+Kernel-level comparison（Baseline = Naive original 0.1831 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.864x
+  Warp   BH-reorder:  0.165x
+  Shared original:    0.616x
+  Shared BH-reorder:  0.657x
+
+Shared break-even: 7091 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525795
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1525843 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 245.42 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2953 ms  |  BW: 52.44 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1705 ms  |  BW: 398.34 GB/s  |  Speedup vs [1]: 7.597x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.4484 ms  |  BW: 46.89 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3466 ms  |  BW: 195.99 GB/s  |  Speedup vs [3]: 4.179x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4815 ms  |  BW: 141.05 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5226 ms  |  BW: 44.61 GB/s  |  Speedup vs [5]: 0.316x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 245.42 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.2953 ms      0.1705 ms     7.597x
+Warp                    1.4484 ms      0.3466 ms     4.179x
+Shared                  0.4815 ms      1.5226 ms     0.316x
+
+Kernel-level comparison（Baseline = Naive original 1.2953 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.894x
+  Warp   BH-reorder:  3.738x
+  Shared original:    2.690x
+  Shared BH-reorder:  0.851x
+
+Naive break-even: 218 iterations
+Warp break-even: 223 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525843
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1525887 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 156.07 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1588 ms  |  BW: 298.94 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5314 ms  |  BW: 89.32 GB/s  |  Speedup vs [1]: 0.299x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.0107 ms  |  BW: 46.96 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2443 ms  |  BW: 194.33 GB/s  |  Speedup vs [3]: 4.138x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3457 ms  |  BW: 137.29 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3422 ms  |  BW: 138.72 GB/s  |  Speedup vs [5]: 1.010x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 156.07 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1588 ms      0.5314 ms     0.299x
+Warp                    1.0107 ms      0.2443 ms     4.138x
+Shared                  0.3457 ms      0.3422 ms     1.010x
+
+Kernel-level comparison（Baseline = Naive original 0.1588 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.157x
+  Warp   BH-reorder:  0.650x
+  Shared original:    0.459x
+  Shared BH-reorder:  0.464x
+
+Warp break-even: 204 iterations
+Shared break-even: 43979 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525887
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1525932 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 512  (Hilbert grid: 4096 x 4096)
+
+Preprocessing (blocked Hilbert, B=512): 168.50 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.3418 ms  |  BW: 26.23 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.1459 ms  |  BW: 28.62 GB/s  |  Speedup vs [1]: 1.091x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2094 ms  |  BW: 293.31 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2298 ms  |  BW: 267.29 GB/s  |  Speedup vs [3]: 0.911x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1146 ms  |  BW: 55.10 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3318 ms  |  BW: 185.09 GB/s  |  Speedup vs [5]: 3.359x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=512): 168.50 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   2.3418 ms      2.1459 ms     1.091x
+Warp                    0.2094 ms      0.2298 ms     0.911x
+Shared                  1.1146 ms      0.3318 ms     3.359x
+
+Kernel-level comparison（Baseline = Naive original 2.3418 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    11.183x
+  Warp   BH-reorder:  10.191x
+  Shared original:    2.101x
+  Shared BH-reorder:  7.057x
+
+Naive break-even: 860 iterations
+Shared break-even: 215 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525932
+
+------------------------------------------
+ ncu: blockedHilbert (B=1024)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1525977 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 1024  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=1024): 12.45 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1552 ms  |  BW: 211.43 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1472 ms  |  BW: 222.81 GB/s  |  Speedup vs [1]: 1.054x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1452 ms  |  BW: 225.94 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1436 ms  |  BW: 228.48 GB/s  |  Speedup vs [3]: 1.011x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1446 ms  |  BW: 226.86 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1434 ms  |  BW: 228.83 GB/s  |  Speedup vs [5]: 1.009x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 12.45 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1552 ms      0.1472 ms     1.054x
+Warp                    0.1452 ms      0.1436 ms     1.011x
+Shared                  0.1446 ms      0.1434 ms     1.009x
+
+Kernel-level comparison（Baseline = Naive original 0.1552 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.069x
+  Warp   BH-reorder:  1.081x
+  Shared original:    1.073x
+  Shared BH-reorder:  1.082x
+
+Naive break-even: 1570 iterations
+Warp break-even: 7722 iterations
+Shared break-even: 10004 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1525977
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1526022 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 1024  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=1024): 8.72 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1532 ms  |  BW: 139.90 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1452 ms  |  BW: 147.63 GB/s  |  Speedup vs [1]: 1.055x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1428 ms  |  BW: 150.06 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1414 ms  |  BW: 151.51 GB/s  |  Speedup vs [3]: 1.010x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1436 ms  |  BW: 149.25 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1415 ms  |  BW: 151.49 GB/s  |  Speedup vs [5]: 1.015x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 8.72 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1532 ms      0.1452 ms     1.055x
+Warp                    0.1428 ms      0.1414 ms     1.010x
+Shared                  0.1436 ms      0.1415 ms     1.015x
+
+Kernel-level comparison（Baseline = Naive original 0.1532 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.073x
+  Warp   BH-reorder:  1.083x
+  Shared original:    1.067x
+  Shared BH-reorder:  1.083x
+
+Naive break-even: 1087 iterations
+Warp break-even: 6353 iterations
+Shared break-even: 4104 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526022
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1526064 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 1024  (Hilbert grid: 128 x 128)
+
+Preprocessing (blocked Hilbert, B=1024): 16.12 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 1.0790 ms  |  BW: 17.05 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3019 ms  |  BW: 60.93 GB/s  |  Speedup vs [1]: 3.574x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1635 ms  |  BW: 112.46 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1624 ms  |  BW: 113.29 GB/s  |  Speedup vs [3]: 1.007x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.5239 ms  |  BW: 35.11 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1633 ms  |  BW: 112.61 GB/s  |  Speedup vs [5]: 3.208x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 16.12 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.0790 ms      0.3019 ms     3.574x
+Warp                    0.1635 ms      0.1624 ms     1.007x
+Shared                  0.5239 ms      0.1633 ms     3.208x
+
+Kernel-level comparison（Baseline = Naive original 1.0790 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    6.598x
+  Warp   BH-reorder:  6.646x
+  Shared original:    2.060x
+  Shared BH-reorder:  6.606x
+
+Naive break-even: 21 iterations
+Warp break-even: 13541 iterations
+Shared break-even: 45 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526064
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1526109 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 134.29 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 1.1497 ms  |  BW: 207.26 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1757 ms  |  BW: 1356.36 GB/s  |  Speedup vs [1]: 6.544x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2111 ms  |  BW: 1128.66 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.1607 ms  |  BW: 205.30 GB/s  |  Speedup vs [3]: 0.182x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2972 ms  |  BW: 801.87 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2797 ms  |  BW: 852.02 GB/s  |  Speedup vs [5]: 1.063x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 134.29 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.1497 ms      0.1757 ms     6.544x
+Warp                    0.2111 ms      1.1607 ms     0.182x
+Shared                  0.2972 ms      0.2797 ms     1.063x
+
+Kernel-level comparison（Baseline = Naive original 1.1497 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    5.446x
+  Warp   BH-reorder:  0.991x
+  Shared original:    3.869x
+  Shared BH-reorder:  4.111x
+
+Naive break-even: 138 iterations
+Shared break-even: 7678 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526109
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1526157 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 245.80 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7381 ms  |  BW: 92.03 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.3515 ms  |  BW: 50.26 GB/s  |  Speedup vs [1]: 0.546x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3479 ms  |  BW: 195.22 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.7631 ms  |  BW: 89.01 GB/s  |  Speedup vs [3]: 0.456x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5425 ms  |  BW: 44.03 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4730 ms  |  BW: 143.61 GB/s  |  Speedup vs [5]: 3.261x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 245.80 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.7381 ms      1.3515 ms     0.546x
+Warp                    0.3479 ms      0.7631 ms     0.456x
+Shared                  1.5425 ms      0.4730 ms     3.261x
+
+Kernel-level comparison（Baseline = Naive original 0.7381 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.121x
+  Warp   BH-reorder:  0.967x
+  Shared original:    0.478x
+  Shared BH-reorder:  1.560x
+
+Shared break-even: 230 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526157
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1526202 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 153.84 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1730 ms  |  BW: 274.45 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2480 ms  |  BW: 38.04 GB/s  |  Speedup vs [1]: 0.139x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2508 ms  |  BW: 189.24 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2460 ms  |  BW: 192.99 GB/s  |  Speedup vs [3]: 1.020x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.3499 ms  |  BW: 35.16 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3424 ms  |  BW: 138.65 GB/s  |  Speedup vs [5]: 3.943x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 153.84 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1730 ms      1.2480 ms     0.139x
+Warp                    0.2508 ms      0.2460 ms     1.020x
+Shared                  1.3499 ms      0.3424 ms     3.943x
+
+Kernel-level comparison（Baseline = Naive original 0.1730 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.690x
+  Warp   BH-reorder:  0.703x
+  Shared original:    0.128x
+  Shared BH-reorder:  0.505x
+
+Warp break-even: 31545 iterations
+Shared break-even: 153 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526202
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1526247 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 1024  (Hilbert grid: 2048 x 2048)
+
+Preprocessing (blocked Hilbert, B=1024): 166.24 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5371 ms  |  BW: 39.96 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.8770 ms  |  BW: 21.35 GB/s  |  Speedup vs [1]: 0.534x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2085 ms  |  BW: 294.60 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6694 ms  |  BW: 91.75 GB/s  |  Speedup vs [3]: 0.311x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1697 ms  |  BW: 52.51 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3322 ms  |  BW: 184.87 GB/s  |  Speedup vs [5]: 3.521x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=1024): 166.24 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5371 ms      2.8770 ms     0.534x
+Warp                    0.2085 ms      0.6694 ms     0.311x
+Shared                  1.1697 ms      0.3322 ms     3.521x
+
+Kernel-level comparison（Baseline = Naive original 1.5371 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.373x
+  Warp   BH-reorder:  2.296x
+  Shared original:    1.314x
+  Shared BH-reorder:  4.627x
+
+Shared break-even: 199 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526247
+
+------------------------------------------
+ ncu: blockedHilbert (B=2048)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1526290 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 2048  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=2048): 12.52 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1530 ms  |  BW: 214.44 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1453 ms  |  BW: 225.87 GB/s  |  Speedup vs [1]: 1.053x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1645 ms  |  BW: 199.46 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1605 ms  |  BW: 204.35 GB/s  |  Speedup vs [3]: 1.025x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1611 ms  |  BW: 203.62 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1606 ms  |  BW: 204.25 GB/s  |  Speedup vs [5]: 1.003x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 12.52 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1530 ms      0.1453 ms     1.053x
+Warp                    0.1645 ms      0.1605 ms     1.025x
+Shared                  0.1611 ms      0.1606 ms     1.003x
+
+Kernel-level comparison（Baseline = Naive original 0.1530 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.930x
+  Warp   BH-reorder:  0.953x
+  Shared original:    0.950x
+  Shared BH-reorder:  0.952x
+
+Naive break-even: 1617 iterations
+Warp break-even: 3178 iterations
+Shared break-even: 25403 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526290
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1526335 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 2048  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=2048): 8.59 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1544 ms  |  BW: 138.77 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1453 ms  |  BW: 147.50 GB/s  |  Speedup vs [1]: 1.063x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1434 ms  |  BW: 149.45 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1426 ms  |  BW: 150.33 GB/s  |  Speedup vs [3]: 1.006x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1436 ms  |  BW: 149.19 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1423 ms  |  BW: 150.62 GB/s  |  Speedup vs [5]: 1.010x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 8.59 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1544 ms      0.1453 ms     1.063x
+Warp                    0.1434 ms      0.1426 ms     1.006x
+Shared                  0.1436 ms      0.1423 ms     1.010x
+
+Kernel-level comparison（Baseline = Naive original 0.1544 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.077x
+  Warp   BH-reorder:  1.083x
+  Shared original:    1.075x
+  Shared BH-reorder:  1.085x
+
+Naive break-even: 940 iterations
+Warp break-even: 10174 iterations
+Shared break-even: 6305 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526335
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1526378 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 2048  (Hilbert grid: 64 x 64)
+
+Preprocessing (blocked Hilbert, B=2048): 15.84 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 1.0189 ms  |  BW: 18.05 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3001 ms  |  BW: 61.28 GB/s  |  Speedup vs [1]: 3.395x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1655 ms  |  BW: 111.16 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.5266 ms  |  BW: 34.93 GB/s  |  Speedup vs [3]: 0.314x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1637 ms  |  BW: 112.39 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1631 ms  |  BW: 112.74 GB/s  |  Speedup vs [5]: 1.003x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 15.84 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.0189 ms      0.3001 ms     3.395x
+Warp                    0.1655 ms      0.5266 ms     0.314x
+Shared                  0.1637 ms      0.1631 ms     1.003x
+
+Kernel-level comparison（Baseline = Naive original 1.0189 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    6.157x
+  Warp   BH-reorder:  1.935x
+  Shared original:    6.226x
+  Shared BH-reorder:  6.245x
+
+Naive break-even: 22 iterations
+Shared break-even: 31130 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526378
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1526424 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 132.14 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1686 ms  |  BW: 1413.17 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1783 ms  |  BW: 1336.71 GB/s  |  Speedup vs [1]: 0.946x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.4443 ms  |  BW: 536.31 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.1602 ms  |  BW: 205.39 GB/s  |  Speedup vs [3]: 0.383x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2973 ms  |  BW: 801.47 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2801 ms  |  BW: 850.78 GB/s  |  Speedup vs [5]: 1.062x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 132.14 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1686 ms      0.1783 ms     0.946x
+Warp                    0.4443 ms      1.1602 ms     0.383x
+Shared                  0.2973 ms      0.2801 ms     1.062x
+
+Kernel-level comparison（Baseline = Naive original 0.1686 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.380x
+  Warp   BH-reorder:  0.145x
+  Shared original:    0.567x
+  Shared BH-reorder:  0.602x
+
+Shared break-even: 7668 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526424
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1526472 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 232.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5353 ms  |  BW: 126.88 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9705 ms  |  BW: 69.99 GB/s  |  Speedup vs [1]: 0.552x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1971 ms  |  BW: 56.74 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3469 ms  |  BW: 195.77 GB/s  |  Speedup vs [3]: 3.450x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4804 ms  |  BW: 141.37 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.8155 ms  |  BW: 83.29 GB/s  |  Speedup vs [5]: 0.589x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 232.82 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.5353 ms      0.9705 ms     0.552x
+Warp                    1.1971 ms      0.3469 ms     3.450x
+Shared                  0.4804 ms      0.8155 ms     0.589x
+
+Kernel-level comparison（Baseline = Naive original 0.5353 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.447x
+  Warp   BH-reorder:  1.543x
+  Shared original:    1.114x
+  Shared BH-reorder:  0.656x
+
+Warp break-even: 274 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526472
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1526516 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 147.39 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1742 ms  |  BW: 272.42 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.6194 ms  |  BW: 76.64 GB/s  |  Speedup vs [1]: 0.281x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2498 ms  |  BW: 190.05 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2457 ms  |  BW: 193.19 GB/s  |  Speedup vs [3]: 1.017x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3465 ms  |  BW: 136.99 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3425 ms  |  BW: 138.60 GB/s  |  Speedup vs [5]: 1.012x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 147.39 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1742 ms      0.6194 ms     0.281x
+Warp                    0.2498 ms      0.2457 ms     1.017x
+Shared                  0.3465 ms      0.3425 ms     1.012x
+
+Kernel-level comparison（Baseline = Naive original 0.1742 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.698x
+  Warp   BH-reorder:  0.709x
+  Shared original:    0.503x
+  Shared BH-reorder:  0.509x
+
+Warp break-even: 36266 iterations
+Shared break-even: 36439 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526516
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1526562 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 2048  (Hilbert grid: 1024 x 1024)
+
+Preprocessing (blocked Hilbert, B=2048): 163.25 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.4435 ms  |  BW: 25.14 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.7113 ms  |  BW: 22.65 GB/s  |  Speedup vs [1]: 0.901x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2103 ms  |  BW: 292.02 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2307 ms  |  BW: 266.19 GB/s  |  Speedup vs [3]: 0.912x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2802 ms  |  BW: 219.23 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3333 ms  |  BW: 184.29 GB/s  |  Speedup vs [5]: 0.841x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=2048): 163.25 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   2.4435 ms      2.7113 ms     0.901x
+Warp                    0.2103 ms      0.2307 ms     0.912x
+Shared                  0.2802 ms      0.3333 ms     0.841x
+
+Kernel-level comparison（Baseline = Naive original 2.4435 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    11.617x
+  Warp   BH-reorder:  10.590x
+  Shared original:    8.722x
+  Shared BH-reorder:  7.332x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526562
+
+------------------------------------------
+ ncu: blockedHilbert (B=4096)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1526607 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 4096  (Hilbert grid: 16 x 16)
+
+Preprocessing (blocked Hilbert, B=4096): 12.08 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1526 ms  |  BW: 215.04 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1459 ms  |  BW: 224.80 GB/s  |  Speedup vs [1]: 1.045x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1430 ms  |  BW: 229.47 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1426 ms  |  BW: 230.14 GB/s  |  Speedup vs [3]: 1.003x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1434 ms  |  BW: 228.77 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1441 ms  |  BW: 227.61 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 12.08 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1526 ms      0.1459 ms     1.045x
+Warp                    0.1430 ms      0.1426 ms     1.003x
+Shared                  0.1434 ms      0.1441 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.1526 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.067x
+  Warp   BH-reorder:  1.070x
+  Shared original:    1.064x
+  Shared BH-reorder:  1.058x
+
+Naive break-even: 1824 iterations
+Warp break-even: 28822 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526607
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1526652 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 4096  (Hilbert grid: 16 x 16)
+
+Preprocessing (blocked Hilbert, B=4096): 8.45 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1536 ms  |  BW: 139.53 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1445 ms  |  BW: 148.33 GB/s  |  Speedup vs [1]: 1.063x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1429 ms  |  BW: 149.99 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1401 ms  |  BW: 152.93 GB/s  |  Speedup vs [3]: 1.020x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1431 ms  |  BW: 149.79 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1409 ms  |  BW: 152.06 GB/s  |  Speedup vs [5]: 1.015x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 8.45 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1536 ms      0.1445 ms     1.063x
+Warp                    0.1429 ms      0.1401 ms     1.020x
+Shared                  0.1431 ms      0.1409 ms     1.015x
+
+Kernel-level comparison（Baseline = Naive original 0.1536 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.075x
+  Warp   BH-reorder:  1.096x
+  Shared original:    1.074x
+  Shared BH-reorder:  1.090x
+
+Naive break-even: 928 iterations
+Warp break-even: 3079 iterations
+Shared break-even: 3961 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526652
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1526695 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 4096  (Hilbert grid: 32 x 32)
+
+Preprocessing (blocked Hilbert, B=4096): 15.53 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 1.2207 ms  |  BW: 15.07 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3095 ms  |  BW: 59.43 GB/s  |  Speedup vs [1]: 3.945x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1645 ms  |  BW: 111.78 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1621 ms  |  BW: 113.50 GB/s  |  Speedup vs [3]: 1.015x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1626 ms  |  BW: 113.13 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.5551 ms  |  BW: 33.13 GB/s  |  Speedup vs [5]: 0.293x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 15.53 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.2207 ms      0.3095 ms     3.945x
+Warp                    0.1645 ms      0.1621 ms     1.015x
+Shared                  0.1626 ms      0.5551 ms     0.293x
+
+Kernel-level comparison（Baseline = Naive original 1.2207 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.419x
+  Warp   BH-reorder:  7.533x
+  Shared original:    7.509x
+  Shared BH-reorder:  2.199x
+
+Naive break-even: 17 iterations
+Warp break-even: 6238 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526695
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1526739 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 129.23 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1683 ms  |  BW: 1416.24 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.3823 ms  |  BW: 623.27 GB/s  |  Speedup vs [1]: 0.440x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.0697 ms  |  BW: 222.77 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2080 ms  |  BW: 1145.54 GB/s  |  Speedup vs [3]: 5.142x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2987 ms  |  BW: 797.78 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 1.2642 ms  |  BW: 188.48 GB/s  |  Speedup vs [5]: 0.236x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 129.23 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1683 ms      0.3823 ms     0.440x
+Warp                    1.0697 ms      0.2080 ms     5.142x
+Shared                  0.2987 ms      1.2642 ms     0.236x
+
+Kernel-level comparison（Baseline = Naive original 0.1683 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.157x
+  Warp   BH-reorder:  0.809x
+  Shared original:    0.563x
+  Shared BH-reorder:  0.133x
+
+Warp break-even: 150 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526739
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1526786 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 241.08 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1623 ms  |  BW: 58.43 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1679 ms  |  BW: 404.50 GB/s  |  Speedup vs [1]: 6.922x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3479 ms  |  BW: 195.24 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2006 ms  |  BW: 56.57 GB/s  |  Speedup vs [3]: 0.290x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4808 ms  |  BW: 141.25 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.9863 ms  |  BW: 68.86 GB/s  |  Speedup vs [5]: 0.488x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 241.08 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.1623 ms      0.1679 ms     6.922x
+Warp                    0.3479 ms      1.2006 ms     0.290x
+Shared                  0.4808 ms      0.9863 ms     0.488x
+
+Kernel-level comparison（Baseline = Naive original 1.1623 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    3.341x
+  Warp   BH-reorder:  0.968x
+  Shared original:    2.417x
+  Shared BH-reorder:  1.178x
+
+Naive break-even: 242 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526786
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1526832 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 142.66 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1743 ms  |  BW: 272.26 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4665 ms  |  BW: 101.75 GB/s  |  Speedup vs [1]: 0.374x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.2615 ms  |  BW: 37.63 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2452 ms  |  BW: 193.59 GB/s  |  Speedup vs [3]: 5.145x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3469 ms  |  BW: 136.83 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3436 ms  |  BW: 138.16 GB/s  |  Speedup vs [5]: 1.010x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 142.66 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1743 ms      0.4665 ms     0.374x
+Warp                    1.2615 ms      0.2452 ms     5.145x
+Shared                  0.3469 ms      0.3436 ms     1.010x
+
+Kernel-level comparison（Baseline = Naive original 0.1743 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.138x
+  Warp   BH-reorder:  0.711x
+  Shared original:    0.503x
+  Shared BH-reorder:  0.507x
+
+Warp break-even: 140 iterations
+Shared break-even: 42660 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526832
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1526877 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/blockedHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 4096  (Hilbert grid: 512 x 512)
+
+Preprocessing (blocked Hilbert, B=4096): 161.25 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5366 ms  |  BW: 39.97 GB/s
+
+[2] Naive CSR      |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 2.9567 ms  |  BW: 20.77 GB/s  |  Speedup vs [1]: 0.520x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2098 ms  |  BW: 292.72 GB/s
+
+[4] Warp CSR       |  blocked-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.1621 ms  |  BW: 52.86 GB/s  |  Speedup vs [3]: 0.181x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2802 ms  |  BW: 219.23 GB/s
+
+[6] Shared CSR     |  blocked-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3301 ms  |  BW: 186.06 GB/s  |  Speedup vs [5]: 0.849x
+
+════════════════════════════════════════════════════════
+Preprocessing (blocked Hilbert, B=4096): 161.25 ms
+
+Kernel                  Original  BH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5366 ms      2.9567 ms     0.520x
+Warp                    0.2098 ms      1.1621 ms     0.181x
+Shared                  0.2802 ms      0.3301 ms     0.849x
+
+Kernel-level comparison（Baseline = Naive original 1.5366 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.323x
+  Warp   BH-reorder:  1.322x
+  Shared original:    5.485x
+  Shared BH-reorder:  4.655x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526877
+
+------------------------------------------
+ ncu: globalHilbert (B=256)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1526921 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 12.21 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1382 ms  |  BW: 237.34 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2236 ms  |  BW: 146.75 GB/s  |  Speedup vs [1]: 0.618x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1369 ms  |  BW: 239.60 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1934 ms  |  BW: 169.62 GB/s  |  Speedup vs [3]: 0.708x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1406 ms  |  BW: 233.35 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2266 ms  |  BW: 144.79 GB/s  |  Speedup vs [5]: 0.621x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 12.21 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1382 ms      0.2236 ms     0.618x
+Warp                    0.1369 ms      0.1934 ms     0.708x
+Shared                  0.1406 ms      0.2266 ms     0.621x
+
+Kernel-level comparison（Baseline = Naive original 0.1382 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.010x
+  Warp   GH-reorder:  0.715x
+  Shared original:    0.983x
+  Shared GH-reorder:  0.610x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526921
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1526966 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 9.91 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1383 ms  |  BW: 154.95 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.2244 ms  |  BW: 95.49 GB/s  |  Speedup vs [1]: 0.616x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1366 ms  |  BW: 156.93 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1365 ms  |  BW: 157.03 GB/s  |  Speedup vs [3]: 1.001x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1361 ms  |  BW: 157.46 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1362 ms  |  BW: 157.39 GB/s  |  Speedup vs [5]: 1.000x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 9.91 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1383 ms      0.2244 ms     0.616x
+Warp                    0.1366 ms      0.1365 ms     1.001x
+Shared                  0.1361 ms      0.1362 ms     1.000x
+
+Kernel-level comparison（Baseline = Naive original 0.1383 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.013x
+  Warp   GH-reorder:  1.013x
+  Shared original:    1.016x
+  Shared GH-reorder:  1.016x
+
+Warp break-even: 116427 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1526966
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1527011 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 18.04 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3128 ms  |  BW: 58.80 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.2535 ms  |  BW: 72.55 GB/s  |  Speedup vs [1]: 1.234x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1368 ms  |  BW: 134.40 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2205 ms  |  BW: 83.41 GB/s  |  Speedup vs [3]: 0.621x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1369 ms  |  BW: 134.32 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1755 ms  |  BW: 104.80 GB/s  |  Speedup vs [5]: 0.780x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 18.04 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.3128 ms      0.2535 ms     1.234x
+Warp                    0.1368 ms      0.2205 ms     0.621x
+Shared                  0.1369 ms      0.1755 ms     0.780x
+
+Kernel-level comparison（Baseline = Naive original 0.3128 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.286x
+  Warp   GH-reorder:  1.418x
+  Shared original:    2.284x
+  Shared GH-reorder:  1.782x
+
+Naive break-even: 304 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527011
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1527054 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 134.40 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2320 ms  |  BW: 1026.93 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2256 ms  |  BW: 1056.32 GB/s  |  Speedup vs [1]: 1.029x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1922 ms  |  BW: 1239.88 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2736 ms  |  BW: 870.87 GB/s  |  Speedup vs [3]: 0.702x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2787 ms  |  BW: 855.09 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2698 ms  |  BW: 883.22 GB/s  |  Speedup vs [5]: 1.033x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 134.40 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2320 ms      0.2256 ms     1.029x
+Warp                    0.1922 ms      0.2736 ms     0.702x
+Shared                  0.2787 ms      0.2698 ms     1.033x
+
+Kernel-level comparison（Baseline = Naive original 0.2320 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.207x
+  Warp   GH-reorder:  0.848x
+  Shared original:    0.833x
+  Shared GH-reorder:  0.860x
+
+Naive break-even: 20818 iterations
+Shared break-even: 15144 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527054
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1527104 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 255.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2554 ms  |  BW: 265.94 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2324 ms  |  BW: 292.21 GB/s  |  Speedup vs [1]: 1.099x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3282 ms  |  BW: 206.95 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4339 ms  |  BW: 156.53 GB/s  |  Speedup vs [3]: 0.756x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4618 ms  |  BW: 147.09 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5617 ms  |  BW: 120.91 GB/s  |  Speedup vs [5]: 0.822x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 255.82 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2554 ms      0.2324 ms     1.099x
+Warp                    0.3282 ms      0.4339 ms     0.756x
+Shared                  0.4618 ms      0.5617 ms     0.822x
+
+Kernel-level comparison（Baseline = Naive original 0.2554 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.778x
+  Warp   GH-reorder:  0.589x
+  Shared original:    0.553x
+  Shared GH-reorder:  0.455x
+
+Naive break-even: 11139 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527104
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1527147 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 157.62 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2359 ms  |  BW: 201.25 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2317 ms  |  BW: 204.83 GB/s  |  Speedup vs [1]: 1.018x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2243 ms  |  BW: 211.64 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2611 ms  |  BW: 181.81 GB/s  |  Speedup vs [3]: 0.859x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3225 ms  |  BW: 147.17 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4140 ms  |  BW: 114.66 GB/s  |  Speedup vs [5]: 0.779x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 157.62 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2359 ms      0.2317 ms     1.018x
+Warp                    0.2243 ms      0.2611 ms     0.859x
+Shared                  0.3225 ms      0.4140 ms     0.779x
+
+Kernel-level comparison（Baseline = Naive original 0.2359 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.052x
+  Warp   GH-reorder:  0.903x
+  Shared original:    0.731x
+  Shared GH-reorder:  0.570x
+
+Naive break-even: 38185 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527147
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1527191 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 256
+
+Preprocessing (global Hilbert, B=256): 180.27 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5112 ms  |  BW: 40.64 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.9261 ms  |  BW: 31.89 GB/s  |  Speedup vs [1]: 0.785x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1896 ms  |  BW: 323.92 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=256)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2143 ms  |  BW: 286.59 GB/s  |  Speedup vs [3]: 0.885x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2881 ms  |  BW: 213.16 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=256, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3671 ms  |  BW: 167.29 GB/s  |  Speedup vs [5]: 0.785x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=256): 180.27 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5112 ms      1.9261 ms     0.785x
+Warp                    0.1896 ms      0.2143 ms     0.885x
+Shared                  0.2881 ms      0.3671 ms     0.785x
+
+Kernel-level comparison（Baseline = Naive original 1.5112 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    7.970x
+  Warp   GH-reorder:  7.051x
+  Shared original:    5.245x
+  Shared GH-reorder:  4.116x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527191
+
+------------------------------------------
+ ncu: globalHilbert (B=512)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1527237 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 12.49 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1395 ms  |  BW: 235.26 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2292 ms  |  BW: 143.12 GB/s  |  Speedup vs [1]: 0.608x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1378 ms  |  BW: 238.14 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2249 ms  |  BW: 145.86 GB/s  |  Speedup vs [3]: 0.613x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1375 ms  |  BW: 238.67 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1846 ms  |  BW: 177.68 GB/s  |  Speedup vs [5]: 0.744x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 12.49 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1395 ms      0.2292 ms     0.608x
+Warp                    0.1378 ms      0.2249 ms     0.613x
+Shared                  0.1375 ms      0.1846 ms     0.744x
+
+Kernel-level comparison（Baseline = Naive original 0.1395 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.012x
+  Warp   GH-reorder:  0.620x
+  Shared original:    1.014x
+  Shared GH-reorder:  0.755x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527237
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1527281 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 9.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1380 ms  |  BW: 155.29 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.2228 ms  |  BW: 96.20 GB/s  |  Speedup vs [1]: 0.619x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1369 ms  |  BW: 156.56 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.2265 ms  |  BW: 94.61 GB/s  |  Speedup vs [3]: 0.604x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1365 ms  |  BW: 156.99 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1367 ms  |  BW: 156.78 GB/s  |  Speedup vs [5]: 0.999x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 9.41 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1380 ms      0.2228 ms     0.619x
+Warp                    0.1369 ms      0.2265 ms     0.604x
+Shared                  0.1365 ms      0.1367 ms     0.999x
+
+Kernel-level comparison（Baseline = Naive original 0.1380 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.008x
+  Warp   GH-reorder:  0.609x
+  Shared original:    1.011x
+  Shared GH-reorder:  1.010x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527281
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1527323 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 17.76 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4033 ms  |  BW: 45.61 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3066 ms  |  BW: 59.99 GB/s  |  Speedup vs [1]: 1.315x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1381 ms  |  BW: 133.21 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1611 ms  |  BW: 114.18 GB/s  |  Speedup vs [3]: 0.857x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2289 ms  |  BW: 80.35 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1381 ms  |  BW: 133.19 GB/s  |  Speedup vs [5]: 1.658x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 17.76 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4033 ms      0.3066 ms     1.315x
+Warp                    0.1381 ms      0.1611 ms     0.857x
+Shared                  0.2289 ms      0.1381 ms     1.658x
+
+Kernel-level comparison（Baseline = Naive original 0.4033 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.921x
+  Warp   GH-reorder:  2.504x
+  Shared original:    1.762x
+  Shared GH-reorder:  2.920x
+
+Naive break-even: 184 iterations
+Shared break-even: 195 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527323
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1527368 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 133.96 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2340 ms  |  BW: 1018.45 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2332 ms  |  BW: 1021.66 GB/s  |  Speedup vs [1]: 1.003x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1922 ms  |  BW: 1239.85 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2534 ms  |  BW: 940.50 GB/s  |  Speedup vs [3]: 0.759x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2788 ms  |  BW: 854.73 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3285 ms  |  BW: 725.33 GB/s  |  Speedup vs [5]: 0.849x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 133.96 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2340 ms      0.2332 ms     1.003x
+Warp                    0.1922 ms      0.2534 ms     0.759x
+Shared                  0.2788 ms      0.3285 ms     0.849x
+
+Kernel-level comparison（Baseline = Naive original 0.2340 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.217x
+  Warp   GH-reorder:  0.923x
+  Shared original:    0.839x
+  Shared GH-reorder:  0.712x
+
+Naive break-even: 181860 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527368
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1527415 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 246.89 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2343 ms  |  BW: 289.93 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2532 ms  |  BW: 268.27 GB/s  |  Speedup vs [1]: 0.925x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3282 ms  |  BW: 206.97 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4470 ms  |  BW: 151.97 GB/s  |  Speedup vs [3]: 0.734x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5519 ms  |  BW: 123.07 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4629 ms  |  BW: 146.72 GB/s  |  Speedup vs [5]: 1.192x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 246.89 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2343 ms      0.2532 ms     0.925x
+Warp                    0.3282 ms      0.4470 ms     0.734x
+Shared                  0.5519 ms      0.4629 ms     1.192x
+
+Kernel-level comparison（Baseline = Naive original 0.2343 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.714x
+  Warp   GH-reorder:  0.524x
+  Shared original:    0.424x
+  Shared GH-reorder:  0.506x
+
+Shared break-even: 2776 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527415
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1527460 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 158.52 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2206 ms  |  BW: 215.18 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2287 ms  |  BW: 207.51 GB/s  |  Speedup vs [1]: 0.964x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2242 ms  |  BW: 211.73 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3291 ms  |  BW: 144.22 GB/s  |  Speedup vs [3]: 0.681x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3471 ms  |  BW: 136.77 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3256 ms  |  BW: 145.79 GB/s  |  Speedup vs [5]: 1.066x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 158.52 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2206 ms      0.2287 ms     0.964x
+Warp                    0.2242 ms      0.3291 ms     0.681x
+Shared                  0.3471 ms      0.3256 ms     1.066x
+
+Kernel-level comparison（Baseline = Naive original 0.2206 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.984x
+  Warp   GH-reorder:  0.670x
+  Shared original:    0.636x
+  Shared GH-reorder:  0.678x
+
+Shared break-even: 7383 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527460
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1527503 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 512
+
+Preprocessing (global Hilbert, B=512): 176.25 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5562 ms  |  BW: 39.47 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.9290 ms  |  BW: 31.84 GB/s  |  Speedup vs [1]: 0.807x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1897 ms  |  BW: 323.82 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2144 ms  |  BW: 286.49 GB/s  |  Speedup vs [3]: 0.885x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2618 ms  |  BW: 234.57 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=512, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3212 ms  |  BW: 191.21 GB/s  |  Speedup vs [5]: 0.815x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=512): 176.25 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5562 ms      1.9290 ms     0.807x
+Warp                    0.1897 ms      0.2144 ms     0.885x
+Shared                  0.2618 ms      0.3212 ms     0.815x
+
+Kernel-level comparison（Baseline = Naive original 1.5562 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    8.205x
+  Warp   GH-reorder:  7.259x
+  Shared original:    5.943x
+  Shared GH-reorder:  4.845x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527503
+
+------------------------------------------
+ ncu: globalHilbert (B=1024)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1527548 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 12.61 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1375 ms  |  BW: 238.67 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2255 ms  |  BW: 145.52 GB/s  |  Speedup vs [1]: 0.610x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1361 ms  |  BW: 241.09 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2229 ms  |  BW: 147.20 GB/s  |  Speedup vs [3]: 0.611x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1359 ms  |  BW: 241.42 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1365 ms  |  BW: 240.33 GB/s  |  Speedup vs [5]: 0.995x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 12.61 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1375 ms      0.2255 ms     0.610x
+Warp                    0.1361 ms      0.2229 ms     0.611x
+Shared                  0.1359 ms      0.1365 ms     0.995x
+
+Kernel-level comparison（Baseline = Naive original 0.1375 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.010x
+  Warp   GH-reorder:  0.617x
+  Shared original:    1.012x
+  Shared GH-reorder:  1.007x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527548
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1527593 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 9.14 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1374 ms  |  BW: 155.97 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.2236 ms  |  BW: 95.83 GB/s  |  Speedup vs [1]: 0.614x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1357 ms  |  BW: 157.96 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1358 ms  |  BW: 157.86 GB/s  |  Speedup vs [3]: 0.999x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1361 ms  |  BW: 157.44 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1364 ms  |  BW: 157.14 GB/s  |  Speedup vs [5]: 0.998x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 9.14 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1374 ms      0.2236 ms     0.614x
+Warp                    0.1357 ms      0.1358 ms     0.999x
+Shared                  0.1361 ms      0.1364 ms     0.998x
+
+Kernel-level comparison（Baseline = Naive original 0.1374 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.013x
+  Warp   GH-reorder:  1.012x
+  Shared original:    1.009x
+  Shared GH-reorder:  1.007x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527593
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1527637 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 17.56 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4084 ms  |  BW: 45.04 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3110 ms  |  BW: 59.13 GB/s  |  Speedup vs [1]: 1.313x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2263 ms  |  BW: 81.27 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1374 ms  |  BW: 133.83 GB/s  |  Speedup vs [3]: 1.647x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2222 ms  |  BW: 82.76 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1375 ms  |  BW: 133.75 GB/s  |  Speedup vs [5]: 1.616x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 17.56 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4084 ms      0.3110 ms     1.313x
+Warp                    0.2263 ms      0.1374 ms     1.647x
+Shared                  0.2222 ms      0.1375 ms     1.616x
+
+Kernel-level comparison（Baseline = Naive original 0.4084 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.804x
+  Warp   GH-reorder:  2.971x
+  Shared original:    1.837x
+  Shared GH-reorder:  2.970x
+
+Naive break-even: 180 iterations
+Warp break-even: 198 iterations
+Shared break-even: 207 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527637
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1527683 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 134.04 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2402 ms  |  BW: 992.00 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2364 ms  |  BW: 1008.09 GB/s  |  Speedup vs [1]: 1.016x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1922 ms  |  BW: 1239.83 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1891 ms  |  BW: 1260.33 GB/s  |  Speedup vs [3]: 1.017x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3562 ms  |  BW: 668.93 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2902 ms  |  BW: 821.24 GB/s  |  Speedup vs [5]: 1.228x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 134.04 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2402 ms      0.2364 ms     1.016x
+Warp                    0.1922 ms      0.1891 ms     1.017x
+Shared                  0.3562 ms      0.2902 ms     1.228x
+
+Kernel-level comparison（Baseline = Naive original 0.2402 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.250x
+  Warp   GH-reorder:  1.270x
+  Shared original:    0.674x
+  Shared GH-reorder:  0.828x
+
+Naive break-even: 34949 iterations
+Warp break-even: 42881 iterations
+Shared break-even: 2029 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527683
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1527732 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 247.50 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2401 ms  |  BW: 282.89 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2236 ms  |  BW: 303.75 GB/s  |  Speedup vs [1]: 1.074x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3974 ms  |  BW: 170.89 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3290 ms  |  BW: 206.47 GB/s  |  Speedup vs [3]: 1.208x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4616 ms  |  BW: 147.15 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5579 ms  |  BW: 121.73 GB/s  |  Speedup vs [5]: 0.827x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 247.50 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2401 ms      0.2236 ms     1.074x
+Warp                    0.3974 ms      0.3290 ms     1.208x
+Shared                  0.4616 ms      0.5579 ms     0.827x
+
+Kernel-level comparison（Baseline = Naive original 0.2401 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.604x
+  Warp   GH-reorder:  0.730x
+  Shared original:    0.520x
+  Shared GH-reorder:  0.430x
+
+Naive break-even: 15016 iterations
+Warp break-even: 3614 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527732
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1527776 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 152.49 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2187 ms  |  BW: 217.02 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2215 ms  |  BW: 214.27 GB/s  |  Speedup vs [1]: 0.987x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2241 ms  |  BW: 211.84 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3081 ms  |  BW: 154.06 GB/s  |  Speedup vs [3]: 0.727x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3222 ms  |  BW: 147.30 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3649 ms  |  BW: 130.07 GB/s  |  Speedup vs [5]: 0.883x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 152.49 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2187 ms      0.2215 ms     0.987x
+Warp                    0.2241 ms      0.3081 ms     0.727x
+Shared                  0.3222 ms      0.3649 ms     0.883x
+
+Kernel-level comparison（Baseline = Naive original 0.2187 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.976x
+  Warp   GH-reorder:  0.710x
+  Shared original:    0.679x
+  Shared GH-reorder:  0.599x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527776
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1527821 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 1024
+
+Preprocessing (global Hilbert, B=1024): 174.97 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.6017 ms  |  BW: 38.35 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.8033 ms  |  BW: 34.06 GB/s  |  Speedup vs [1]: 0.888x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2761 ms  |  BW: 222.45 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=1024)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2764 ms  |  BW: 222.21 GB/s  |  Speedup vs [3]: 0.999x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3489 ms  |  BW: 176.02 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=1024, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3169 ms  |  BW: 193.80 GB/s  |  Speedup vs [5]: 1.101x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=1024): 174.97 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.6017 ms      1.8033 ms     0.888x
+Warp                    0.2761 ms      0.2764 ms     0.999x
+Shared                  0.3489 ms      0.3169 ms     1.101x
+
+Kernel-level comparison（Baseline = Naive original 1.6017 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    5.801x
+  Warp   GH-reorder:  5.795x
+  Shared original:    4.590x
+  Shared GH-reorder:  5.054x
+
+Shared break-even: 5464 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527821
+
+------------------------------------------
+ ncu: globalHilbert (B=2048)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1527866 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 12.90 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1373 ms  |  BW: 238.96 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2245 ms  |  BW: 146.11 GB/s  |  Speedup vs [1]: 0.611x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1362 ms  |  BW: 240.82 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1571 ms  |  BW: 208.80 GB/s  |  Speedup vs [3]: 0.867x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2494 ms  |  BW: 131.53 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1355 ms  |  BW: 242.08 GB/s  |  Speedup vs [5]: 1.841x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 12.90 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1373 ms      0.2245 ms     0.611x
+Warp                    0.1362 ms      0.1571 ms     0.867x
+Shared                  0.2494 ms      0.1355 ms     1.841x
+
+Kernel-level comparison（Baseline = Naive original 0.1373 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.008x
+  Warp   GH-reorder:  0.874x
+  Shared original:    0.550x
+  Shared GH-reorder:  1.013x
+
+Shared break-even: 113 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527866
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1527911 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 9.53 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1382 ms  |  BW: 155.05 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1370 ms  |  BW: 156.37 GB/s  |  Speedup vs [1]: 1.009x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.2240 ms  |  BW: 95.67 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1369 ms  |  BW: 156.57 GB/s  |  Speedup vs [3]: 1.637x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.2194 ms  |  BW: 97.69 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1368 ms  |  BW: 156.70 GB/s  |  Speedup vs [5]: 1.604x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 9.53 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1382 ms      0.1370 ms     1.009x
+Warp                    0.2240 ms      0.1369 ms     1.637x
+Shared                  0.2194 ms      0.1368 ms     1.604x
+
+Kernel-level comparison（Baseline = Naive original 0.1382 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.617x
+  Warp   GH-reorder:  1.010x
+  Shared original:    0.630x
+  Shared GH-reorder:  1.011x
+
+Naive break-even: 8140 iterations
+Warp break-even: 109 iterations
+Shared break-even: 115 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527911
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1527955 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 16.90 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.4033 ms  |  BW: 45.61 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.2657 ms  |  BW: 69.22 GB/s  |  Speedup vs [1]: 1.518x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1470 ms  |  BW: 125.08 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2276 ms  |  BW: 80.80 GB/s  |  Speedup vs [3]: 0.646x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1378 ms  |  BW: 133.43 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2209 ms  |  BW: 83.27 GB/s  |  Speedup vs [5]: 0.624x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 16.90 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.4033 ms      0.2657 ms     1.518x
+Warp                    0.1470 ms      0.2276 ms     0.646x
+Shared                  0.1378 ms      0.2209 ms     0.624x
+
+Kernel-level comparison（Baseline = Naive original 0.4033 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    2.743x
+  Warp   GH-reorder:  1.772x
+  Shared original:    2.926x
+  Shared GH-reorder:  1.826x
+
+Naive break-even: 123 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527955
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1527999 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 135.23 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.1487 ms  |  BW: 1601.96 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2529 ms  |  BW: 942.32 GB/s  |  Speedup vs [1]: 0.588x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2434 ms  |  BW: 979.03 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2484 ms  |  BW: 959.38 GB/s  |  Speedup vs [3]: 0.980x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2786 ms  |  BW: 855.34 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3032 ms  |  BW: 785.99 GB/s  |  Speedup vs [5]: 0.919x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 135.23 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1487 ms      0.2529 ms     0.588x
+Warp                    0.2434 ms      0.2484 ms     0.980x
+Shared                  0.2786 ms      0.3032 ms     0.919x
+
+Kernel-level comparison（Baseline = Naive original 0.1487 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.611x
+  Warp   GH-reorder:  0.599x
+  Shared original:    0.534x
+  Shared GH-reorder:  0.491x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1527999
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1528047 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 235.10 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2399 ms  |  BW: 283.14 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2481 ms  |  BW: 273.80 GB/s  |  Speedup vs [1]: 0.967x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3281 ms  |  BW: 207.02 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3289 ms  |  BW: 206.51 GB/s  |  Speedup vs [3]: 0.998x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5649 ms  |  BW: 120.24 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4633 ms  |  BW: 146.60 GB/s  |  Speedup vs [5]: 1.219x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 235.10 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2399 ms      0.2481 ms     0.967x
+Warp                    0.3281 ms      0.3289 ms     0.998x
+Shared                  0.5649 ms      0.4633 ms     1.219x
+
+Kernel-level comparison（Baseline = Naive original 0.2399 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.731x
+  Warp   GH-reorder:  0.729x
+  Shared original:    0.425x
+  Shared GH-reorder:  0.518x
+
+Shared break-even: 2314 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528047
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1528092 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 145.82 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2410 ms  |  BW: 196.98 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2243 ms  |  BW: 211.60 GB/s  |  Speedup vs [1]: 1.074x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2241 ms  |  BW: 211.80 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2286 ms  |  BW: 207.63 GB/s  |  Speedup vs [3]: 0.980x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3268 ms  |  BW: 145.25 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4106 ms  |  BW: 115.61 GB/s  |  Speedup vs [5]: 0.796x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 145.82 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2410 ms      0.2243 ms     1.074x
+Warp                    0.2241 ms      0.2286 ms     0.980x
+Shared                  0.3268 ms      0.4106 ms     0.796x
+
+Kernel-level comparison（Baseline = Naive original 0.2410 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.075x
+  Warp   GH-reorder:  1.054x
+  Shared original:    0.737x
+  Shared GH-reorder:  0.587x
+
+Naive break-even: 8761 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528092
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1528137 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 2048
+
+Preprocessing (global Hilbert, B=2048): 171.41 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5697 ms  |  BW: 39.13 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7836 ms  |  BW: 34.44 GB/s  |  Speedup vs [1]: 0.880x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1899 ms  |  BW: 323.43 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=2048)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2137 ms  |  BW: 287.36 GB/s  |  Speedup vs [3]: 0.888x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2619 ms  |  BW: 234.51 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=2048, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3743 ms  |  BW: 164.10 GB/s  |  Speedup vs [5]: 0.700x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=2048): 171.41 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5697 ms      1.7836 ms     0.880x
+Warp                    0.1899 ms      0.2137 ms     0.888x
+Shared                  0.2619 ms      0.3743 ms     0.700x
+
+Kernel-level comparison（Baseline = Naive original 1.5697 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    8.265x
+  Warp   GH-reorder:  7.344x
+  Shared original:    5.993x
+  Shared GH-reorder:  4.194x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528137
+
+------------------------------------------
+ ncu: globalHilbert (B=4096)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1528182 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 12.42 ms
+
+[1] Naive CSR      |  original
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.1376 ms  |  BW: 238.49 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 2.02e-06  [PASSED]
+  Time: 0.2242 ms  |  BW: 146.34 GB/s  |  Speedup vs [1]: 0.614x
+
+[3] Warp CSR       |  original
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1356 ms  |  BW: 241.93 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1362 ms  |  BW: 240.92 GB/s  |  Speedup vs [3]: 0.996x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.2303 ms  |  BW: 142.44 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.98e-06  [PASSED]
+  Time: 0.1360 ms  |  BW: 241.16 GB/s  |  Speedup vs [5]: 1.693x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 12.42 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1376 ms      0.2242 ms     0.614x
+Warp                    0.1356 ms      0.1362 ms     0.996x
+Shared                  0.2303 ms      0.1360 ms     1.693x
+
+Kernel-level comparison（Baseline = Naive original 0.1376 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.014x
+  Warp   GH-reorder:  1.010x
+  Shared original:    0.597x
+  Shared GH-reorder:  1.011x
+
+Shared break-even: 132 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528182
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1528226 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 9.26 ms
+
+[1] Naive CSR      |  original
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1405 ms  |  BW: 152.51 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 3.52e-08  [PASSED]
+  Time: 0.1377 ms  |  BW: 155.63 GB/s  |  Speedup vs [1]: 1.020x
+
+[3] Warp CSR       |  original
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1367 ms  |  BW: 156.80 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1376 ms  |  BW: 155.77 GB/s  |  Speedup vs [3]: 0.993x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.2217 ms  |  BW: 96.69 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 4.59e-08  [PASSED]
+  Time: 0.1370 ms  |  BW: 156.38 GB/s  |  Speedup vs [5]: 1.617x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 9.26 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.1405 ms      0.1377 ms     1.020x
+Warp                    0.1367 ms      0.1376 ms     0.993x
+Shared                  0.2217 ms      0.1370 ms     1.617x
+
+Kernel-level comparison（Baseline = Naive original 0.1405 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.028x
+  Warp   GH-reorder:  1.021x
+  Shared original:    0.634x
+  Shared GH-reorder:  1.025x
+
+Naive break-even: 3290 iterations
+Shared break-even: 109 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528226
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1528272 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 16.94 ms
+
+[1] Naive CSR      |  original
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3129 ms  |  BW: 58.78 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 6.47e-08  [PASSED]
+  Time: 0.3280 ms  |  BW: 56.07 GB/s  |  Speedup vs [1]: 0.954x
+
+[3] Warp CSR       |  original
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2335 ms  |  BW: 78.77 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1371 ms  |  BW: 134.12 GB/s  |  Speedup vs [3]: 1.703x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.2211 ms  |  BW: 83.17 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 7.14e-08  [PASSED]
+  Time: 0.1379 ms  |  BW: 133.38 GB/s  |  Speedup vs [5]: 1.604x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 16.94 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.3129 ms      0.3280 ms     0.954x
+Warp                    0.2335 ms      0.1371 ms     1.703x
+Shared                  0.2211 ms      0.1379 ms     1.604x
+
+Kernel-level comparison（Baseline = Naive original 0.3129 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.340x
+  Warp   GH-reorder:  2.282x
+  Shared original:    1.415x
+  Shared GH-reorder:  2.269x
+
+Warp break-even: 176 iterations
+Shared break-even: 204 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528272
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1528319 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 130.73 ms
+
+[1] Naive CSR      |  original
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2241 ms  |  BW: 1063.43 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.20e-07  [PASSED]
+  Time: 0.2302 ms  |  BW: 1034.96 GB/s  |  Speedup vs [1]: 0.973x
+
+[3] Warp CSR       |  original
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.1921 ms  |  BW: 1240.16 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.2691 ms  |  BW: 885.47 GB/s  |  Speedup vs [3]: 0.714x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3600 ms  |  BW: 661.93 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 1.16e-07  [PASSED]
+  Time: 0.3578 ms  |  BW: 665.95 GB/s  |  Speedup vs [5]: 1.006x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 130.73 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2241 ms      0.2302 ms     0.973x
+Warp                    0.1921 ms      0.2691 ms     0.714x
+Shared                  0.3600 ms      0.3578 ms     1.006x
+
+Kernel-level comparison（Baseline = Naive original 0.2241 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.166x
+  Warp   GH-reorder:  0.833x
+  Shared original:    0.622x
+  Shared GH-reorder:  0.626x
+
+Shared break-even: 60213 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528319
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1528367 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 243.59 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2605 ms  |  BW: 260.74 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2469 ms  |  BW: 275.09 GB/s  |  Speedup vs [1]: 1.055x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3314 ms  |  BW: 204.97 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3280 ms  |  BW: 207.09 GB/s  |  Speedup vs [3]: 1.010x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.5718 ms  |  BW: 118.78 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.4634 ms  |  BW: 146.57 GB/s  |  Speedup vs [5]: 1.234x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 243.59 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2605 ms      0.2469 ms     1.055x
+Warp                    0.3314 ms      0.3280 ms     1.010x
+Shared                  0.5718 ms      0.4634 ms     1.234x
+
+Kernel-level comparison（Baseline = Naive original 0.2605 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    0.786x
+  Warp   GH-reorder:  0.794x
+  Shared original:    0.456x
+  Shared GH-reorder:  0.562x
+
+Naive break-even: 17926 iterations
+Warp break-even: 71787 iterations
+Shared break-even: 2246 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528367
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1528412 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 143.13 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2392 ms  |  BW: 198.40 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2400 ms  |  BW: 197.78 GB/s  |  Speedup vs [1]: 0.997x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2243 ms  |  BW: 211.67 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2282 ms  |  BW: 208.00 GB/s  |  Speedup vs [3]: 0.983x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3223 ms  |  BW: 147.27 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3266 ms  |  BW: 145.34 GB/s  |  Speedup vs [5]: 0.987x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 143.13 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   0.2392 ms      0.2400 ms     0.997x
+Warp                    0.2243 ms      0.2282 ms     0.983x
+Shared                  0.3223 ms      0.3266 ms     0.987x
+
+Kernel-level comparison（Baseline = Naive original 0.2392 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    1.067x
+  Warp   GH-reorder:  1.048x
+  Shared original:    0.742x
+  Shared GH-reorder:  0.733x
+
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528412
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1528457 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/globalHilbert)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Hilbert block size: 4096
+
+Preprocessing (global Hilbert, B=4096): 169.08 ms
+
+[1] Naive CSR      |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.5314 ms  |  BW: 40.11 GB/s
+
+[2] Naive CSR      |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 1.7834 ms  |  BW: 34.44 GB/s  |  Speedup vs [1]: 0.859x
+
+[3] Warp CSR       |  original
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.1896 ms  |  BW: 324.00 GB/s
+
+[4] Warp CSR       |  global-hilbert-reordered  (B=4096)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.2141 ms  |  BW: 286.88 GB/s  |  Speedup vs [3]: 0.885x
+
+[5] Shared CSR     |  original  (window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3234 ms  |  BW: 189.90 GB/s
+
+[6] Shared CSR     |  global-hilbert-reordered  (B=4096, window=512)
+  L2 error: 0.00e+00  [PASSED]
+  Time: 0.3174 ms  |  BW: 193.52 GB/s  |  Speedup vs [5]: 1.019x
+
+════════════════════════════════════════════════════════
+Preprocessing (global Hilbert, B=4096): 169.08 ms
+
+Kernel                  Original  GH-Reordered    Reo/Orig
+────────────────────────────────────────────────────────
+Naive                   1.5314 ms      1.7834 ms     0.859x
+Warp                    0.1896 ms      0.2141 ms     0.885x
+Shared                  0.3234 ms      0.3174 ms     1.019x
+
+Kernel-level comparison（Baseline = Naive original 1.5314 ms）:
+────────────────────────────────────────────────────────
+  Warp   original:    8.078x
+  Warp   GH-reorder:  7.153x
+  Shared original:    4.735x
+  Shared GH-reorder:  4.825x
+
+Shared break-even: 27987 iterations
+════════════════════════════════════════════════════════
+==PROF== Disconnected from process 1528457
+

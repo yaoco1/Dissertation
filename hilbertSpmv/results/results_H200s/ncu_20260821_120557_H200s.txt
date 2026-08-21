@@ -1,0 +1,771 @@
+Start time: Fri Aug 21 12:07:19 PM BST 2026
+
+==========================================
+ Phase 2: ncu Memory Workload Analysis
+==========================================
+------------------------------------------
+ ncu: baseline (cuSPARSE)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1521112 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+cuSPARSE baseline:
+  Average time: 0.5186 ms
+  Bandwidth:    63.26 GB/s
+  GFLOPS:       15.45
+==PROF== Disconnected from process 1521112
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1521157 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+cuSPARSE baseline:
+  Average time: 0.5175 ms
+  Bandwidth:    41.42 GB/s
+  GFLOPS:       10.05
+==PROF== Disconnected from process 1521157
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1521201 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+cuSPARSE baseline:
+  Average time: 0.5164 ms
+  Bandwidth:    35.62 GB/s
+  GFLOPS:       8.25
+==PROF== Disconnected from process 1521201
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1521247 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+cuSPARSE baseline:
+  Average time: 0.5205 ms
+  Bandwidth:    457.78 GB/s
+  GFLOPS:       108.32
+==PROF== Disconnected from process 1521247
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1521295 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+cuSPARSE baseline:
+  Average time: 0.5295 ms
+  Bandwidth:    128.27 GB/s
+  GFLOPS:       20.90
+==PROF== Disconnected from process 1521295
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1521337 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+cuSPARSE baseline:
+  Average time: 0.6162 ms
+  Bandwidth:    77.03 GB/s
+  GFLOPS:       12.47
+==PROF== Disconnected from process 1521337
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1521381 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/baseline)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+cuSPARSE baseline:
+  Average time: 0.5291 ms
+  Bandwidth:    116.09 GB/s
+  GFLOPS:       22.59
+==PROF== Disconnected from process 1521381
+
+------------------------------------------
+ ncu: naiveCsr
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1521425 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 2.02e-06
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.2271 ms
+  Bandwidth: 144.45 GB/s
+  GFLOPS:    35.29
+==PROF== Disconnected from process 1521425
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1521470 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 3.52e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.2311 ms
+  Bandwidth: 92.74 GB/s
+  GFLOPS:    22.51
+==PROF== Disconnected from process 1521470
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1521514 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 6.47e-08
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.3267 ms
+  Bandwidth: 56.30 GB/s
+  GFLOPS:    13.04
+==PROF== Disconnected from process 1521514
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1521559 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.20e-07
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.2279 ms
+  Bandwidth: 1045.55 GB/s
+  GFLOPS:    247.40
+==PROF== Disconnected from process 1521559
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1521607 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.2441 ms
+  Bandwidth: 278.23 GB/s
+  GFLOPS:    45.33
+==PROF== Disconnected from process 1521607
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1521651 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      0.1524 ms
+  Bandwidth: 311.44 GB/s
+  GFLOPS:    50.43
+==PROF== Disconnected from process 1521651
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1521695 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/naiveCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Naive CSR Kernel] block_size=256:
+  Time:      1.5108 ms
+  Bandwidth: 40.66 GB/s
+  GFLOPS:    7.91
+==PROF== Disconnected from process 1521695
+
+------------------------------------------
+ ncu: warpCsr
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1521740 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.2269 ms
+  Bandwidth: 144.58 GB/s
+  GFLOPS:    35.32
+==PROF== Disconnected from process 1521740
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1521785 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.2004 ms
+  Bandwidth: 106.96 GB/s
+  GFLOPS:    25.96
+==PROF== Disconnected from process 1521785
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1521828 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.2304 ms
+  Bandwidth: 79.83 GB/s
+  GFLOPS:    18.48
+==PROF== Disconnected from process 1521828
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1521874 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.2293 ms
+  Bandwidth: 1039.05 GB/s
+  GFLOPS:    245.86
+==PROF== Disconnected from process 1521874
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1521919 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.4141 ms
+  Bandwidth: 164.03 GB/s
+  GFLOPS:    26.73
+==PROF== Disconnected from process 1521919
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1521964 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.2309 ms
+  Bandwidth: 205.55 GB/s
+  GFLOPS:    33.29
+==PROF== Disconnected from process 1521964
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1522007 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/warpCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Warp-Cooperative CSR Kernel] block_size=256:
+  Time:      0.1895 ms
+  Bandwidth: 324.16 GB/s
+  GFLOPS:    63.07
+==PROF== Disconnected from process 1522007
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=256)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1522052 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.1992 ms
+  Bandwidth: 164.72 GB/s
+  GFLOPS:    40.24
+==PROF== Disconnected from process 1522052
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1522097 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.2328 ms
+  Bandwidth: 92.06 GB/s
+  GFLOPS:    22.34
+==PROF== Disconnected from process 1522097
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1522142 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.2301 ms
+  Bandwidth: 79.93 GB/s
+  GFLOPS:    18.51
+==PROF== Disconnected from process 1522142
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1522188 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.2643 ms
+  Bandwidth: 901.50 GB/s
+  GFLOPS:    213.32
+==PROF== Disconnected from process 1522188
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1522237 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.4178 ms
+  Bandwidth: 162.56 GB/s
+  GFLOPS:    26.49
+==PROF== Disconnected from process 1522237
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1522282 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.4208 ms
+  Bandwidth: 112.81 GB/s
+  GFLOPS:    18.27
+==PROF== Disconnected from process 1522282
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1522326 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 256 elements (1.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=256:
+  Time:      0.2369 ms
+  Bandwidth: 259.25 GB/s
+  GFLOPS:    50.44
+==PROF== Disconnected from process 1522326
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=512)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1522371 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.2042 ms
+  Bandwidth: 160.66 GB/s
+  GFLOPS:    39.25
+==PROF== Disconnected from process 1522371
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1522416 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.2156 ms
+  Bandwidth: 99.38 GB/s
+  GFLOPS:    24.12
+==PROF== Disconnected from process 1522416
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1522461 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.1989 ms
+  Bandwidth: 92.48 GB/s
+  GFLOPS:    21.41
+==PROF== Disconnected from process 1522461
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1522507 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.3680 ms
+  Bandwidth: 647.51 GB/s
+  GFLOPS:    153.22
+==PROF== Disconnected from process 1522507
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1522556 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.4603 ms
+  Bandwidth: 147.56 GB/s
+  GFLOPS:    24.04
+==PROF== Disconnected from process 1522556
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1522601 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.4500 ms
+  Bandwidth: 105.47 GB/s
+  GFLOPS:    17.08
+==PROF== Disconnected from process 1522601
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1522646 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 512 elements (2.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=512:
+  Time:      0.2619 ms
+  Bandwidth: 234.52 GB/s
+  GFLOPS:    45.63
+==PROF== Disconnected from process 1522646
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=1024)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1522690 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.2316 ms
+  Bandwidth: 141.63 GB/s
+  GFLOPS:    34.60
+==PROF== Disconnected from process 1522690
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1522736 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.2326 ms
+  Bandwidth: 92.15 GB/s
+  GFLOPS:    22.36
+==PROF== Disconnected from process 1522736
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1522781 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.2373 ms
+  Bandwidth: 77.51 GB/s
+  GFLOPS:    17.95
+==PROF== Disconnected from process 1522781
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1522824 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.3200 ms
+  Bandwidth: 744.54 GB/s
+  GFLOPS:    176.18
+==PROF== Disconnected from process 1522824
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1522873 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.5322 ms
+  Bandwidth: 127.63 GB/s
+  GFLOPS:    20.80
+==PROF== Disconnected from process 1522873
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1522916 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.5020 ms
+  Bandwidth: 94.55 GB/s
+  GFLOPS:    15.31
+==PROF== Disconnected from process 1522916
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1522961 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 1024 elements (4.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=1024:
+  Time:      0.3625 ms
+  Bandwidth: 169.44 GB/s
+  GFLOPS:    32.97
+==PROF== Disconnected from process 1522961
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=2048)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1523006 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.1969 ms
+  Bandwidth: 166.59 GB/s
+  GFLOPS:    40.70
+==PROF== Disconnected from process 1523006
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1523051 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.2390 ms
+  Bandwidth: 89.66 GB/s
+  GFLOPS:    21.76
+==PROF== Disconnected from process 1523051
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1523096 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.2184 ms
+  Bandwidth: 84.21 GB/s
+  GFLOPS:    19.50
+==PROF== Disconnected from process 1523096
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1523142 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.3942 ms
+  Bandwidth: 604.43 GB/s
+  GFLOPS:    143.02
+==PROF== Disconnected from process 1523142
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1523191 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.6670 ms
+  Bandwidth: 101.83 GB/s
+  GFLOPS:    16.59
+==PROF== Disconnected from process 1523191
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1523235 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.5985 ms
+  Bandwidth: 79.31 GB/s
+  GFLOPS:    12.84
+==PROF== Disconnected from process 1523235
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1523280 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 2048 elements (8.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=2048:
+  Time:      0.4752 ms
+  Bandwidth: 129.26 GB/s
+  GFLOPS:    25.15
+==PROF== Disconnected from process 1523280
+
+------------------------------------------
+ ncu: sharedCsr (sharedVecSize=4096)
+------------------------------------------
+--- script/data/sciComputingMatrix/cant/cant.mtx ---
+==PROF== Connected to process 1523325 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 62451 x 62451, nnz = 4007383
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.98e-06
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.2243 ms
+  Bandwidth: 146.28 GB/s
+  GFLOPS:    35.74
+==PROF== Disconnected from process 1523325
+
+--- script/data/sciComputingMatrix/ct20stif/ct20stif.mtx ---
+==PROF== Connected to process 1523370 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 52329 x 52329, nnz = 2600295
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 4.59e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.2320 ms
+  Bandwidth: 92.38 GB/s
+  GFLOPS:    22.42
+==PROF== Disconnected from process 1523370
+
+--- script/data/randomSparseMatrix/barrier2-1/barrier2-1.mtx ---
+==PROF== Connected to process 1523414 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 113076 x 113076, nnz = 2129496
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 7.14e-08
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.2430 ms
+  Bandwidth: 75.68 GB/s
+  GFLOPS:    17.52
+==PROF== Disconnected from process 1523414
+
+--- script/data/randomSparseMatrix/nlpkkt80/nlpkkt80.mtx ---
+==PROF== Connected to process 1523460 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1062400 x 1062400, nnz = 28192672
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 1.16e-07
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.5541 ms
+  Bandwidth: 430.06 GB/s
+  GFLOPS:    101.76
+==PROF== Disconnected from process 1523460
+
+--- script/data/graphMatrix/roadNet-CA/roadNet-CA.mtx ---
+==PROF== Connected to process 1523509 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1971281 x 1971281, nnz = 5533214
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      1.0893 ms
+  Bandwidth: 62.35 GB/s
+  GFLOPS:    10.16
+==PROF== Disconnected from process 1523509
+
+--- script/data/graphMatrix/roadNet-TX/roadNet-TX.mtx ---
+==PROF== Connected to process 1523555 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1393383 x 1393383, nnz = 3843320
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.7908 ms
+  Bandwidth: 60.03 GB/s
+  GFLOPS:    9.72
+==PROF== Disconnected from process 1523555
+
+--- script/data/largeScaleGraphMatrix/com-Youtube/com-Youtube.mtx ---
+==PROF== Connected to process 1523599 (/lustre/disk/home/users/refojoj/MSc/2025-2026/Projects/yaoco/Dissertation_-_2026_08_21/hilbertSpmv/build/sharedCsr)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+Matrix: 1134890 x 1134890, nnz = 5975248
+Shared memory window: 4096 elements (16.0 KB)
+Relative L2 error: 0.00e+00
+Correctness: PASSED
+
+[Shared Memory CSR Kernel] block_size=256, sharedVecSize=4096:
+  Time:      0.5501 ms
+  Bandwidth: 111.65 GB/s
+  GFLOPS:    21.72
+==PROF== Disconnected from process 1523599
+
